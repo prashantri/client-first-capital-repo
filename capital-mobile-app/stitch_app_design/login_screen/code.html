@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | Client First Capital</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#38761D", // Forest Green from Arbor Institutional
+                    "primary-container": "#e9f5e6",
+                    "on-primary": "#ffffff",
+                    "surface": "#ffffff",
+                    "on-surface": "#1c1c1c",
+                    "surface-container-low": "#f8f9f8",
+                    "surface-container-high": "#f0f2f0",
+                    "outline": "#727970",
+                    "outline-variant": "#c2c9bd",
+                    "secondary": "#53634e",
+                    "on-secondary": "#ffffff",
+                    "background": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+        }
+        h1, h2, h3 {
+            font-family: 'Manrope', sans-serif;
+        }
+        .institutional-button {
+            background-color: #38761D;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .institutional-button:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-body">
+<!-- TopAppBar component style -->
+<nav class="fixed top-0 left-0 w-full h-16 px-6 flex items-center justify-between bg-white/80 backdrop-blur-xl z-50">
+<button class="flex items-center gap-2 text-primary hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-xl" data-icon="arrow_back">arrow_back</span>
+<span class="font-label text-sm font-bold tracking-tight">Back</span>
+</button>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="park">park</span>
+<div class="text-primary font-headline font-extrabold text-lg tracking-tighter">
+            Client First Capital
+        </div>
+</div>
+<div class="w-10"></div> <!-- Spacer for balance -->
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-6 pt-24 pb-12">
+<div class="w-full max-w-md">
+<!-- Welcome Header -->
+<div class="mb-10 text-center">
+<h1 class="text-4xl font-headline font-extrabold text-on-surface tracking-tight mb-2">Welcome Back</h1>
+<p class="text-secondary font-body text-lg">Institutional Access Portal</p>
+</div>
+<!-- Login Form -->
+<form class="space-y-6">
+<!-- Username/Email Field -->
+<div class="space-y-1.5">
+<label class="block font-label text-xs font-bold uppercase tracking-widest text-secondary ml-1" for="identity">
+                    Mobile number / Email
+                </label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3.5 text-on-surface placeholder:text-stone-400 focus:ring-1 focus:ring-primary focus:border-primary transition-all duration-200" id="identity" placeholder="Enter your contact details" type="text"/>
+</div>
+</div>
+<!-- OTP/Password Field -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center px-1">
+<label class="block font-label text-xs font-bold uppercase tracking-widest text-secondary" for="security">
+                        OTP / Password
+                    </label>
+<a class="text-primary font-label text-sm font-semibold hover:underline" href="#">Forgot Password?</a>
+</div>
+<div class="relative">
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3.5 text-on-surface placeholder:text-stone-400 focus:ring-1 focus:ring-primary focus:border-primary transition-all duration-200" id="security" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<!-- Primary Action -->
+<div class="pt-4">
+<button class="institutional-button w-full text-on-primary font-label font-bold py-4 rounded-lg shadow-sm hover:opacity-90 active:scale-[0.98] transition-all duration-200" type="submit">
+                    Login to Dashboard
+                </button>
+</div>
+</form>
+<!-- Secondary Path -->
+<div class="mt-8 text-center">
+<p class="text-secondary font-body text-sm">
+                Don't have an account? 
+                <a class="text-primary font-bold hover:underline" href="#">Sign Up</a>
+</p>
+</div>
+<!-- Visual Accent (Institutional Polish) -->
+<div class="mt-16 flex items-center justify-center">
+<div class="h-[1px] w-12 bg-outline-variant"></div>
+<div class="mx-4">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div class="h-[1px] w-12 bg-outline-variant"></div>
+</div>
+<p class="text-center text-[10px] uppercase tracking-[0.2em] text-secondary mt-4 font-label font-bold">
+            Secure Banking Standard • SIPC Insured
+        </p>
+</div>
+</main>
+<!-- Desktop Image Panel (Hidden on Mobile) -->
+<div class="hidden lg:block fixed right-0 top-0 h-screen w-1/3 overflow-hidden border-l border-stone-100">
+<div class="h-full w-full bg-cover bg-center grayscale contrast-110" data-alt="minimalist architectural detail of a modern glass office building with sharp shadows and clear blue sky reflection" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDGGh1ilwSgT4_GfQVKvU8rOll5KjCwE1oG7h7ReqpZAWjvFe9Ot86BcjB-tvq2_fIZ-IGNNd9tmNM0O737vsV_LjhaWqzY4vnqQf64FgD4tgSuEEiGEEx_JjMJMMAulauHGr7nr6fDLsSmIM6EQ6XFgUm6qSyLJSuljIAMT6psob5ZBeOwcknNcg95LRMwHU_Jeb0eiPfi7DYZx2cGmVhUp9sNR3FqxGpCYJvh4gEEDSIOT-5dwRsRH5DDLsr6I2TB7-_qE0fQvaA')"></div>
+<div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
+<div class="absolute bottom-16 left-12 right-12 text-on-surface bg-white/90 p-8 rounded-lg backdrop-blur shadow-xl border border-stone-100">
+<h2 class="text-2xl font-headline font-bold mb-4 text-primary leading-tight">Integrity in every transaction.</h2>
+<p class="text-secondary font-body leading-relaxed text-sm">Experience a new standard of private wealth management, designed for the modern institutional partner.</p>
+</div>
+</div>
+</body></html>

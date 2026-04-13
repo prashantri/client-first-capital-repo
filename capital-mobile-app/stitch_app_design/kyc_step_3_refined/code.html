@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f6f6f4",
+                    "surface-container-high": "#ebebe9",
+                    "inverse-on-surface": "#f1f1ef",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#d6e6d1",
+                    "background": "#fbfbf9",
+                    "on-tertiary-fixed": "#001f2a",
+                    "surface-container-highest": "#e2e2df",
+                    "on-primary-fixed-variant": "#1d3a0e",
+                    "outline": "#757871",
+                    "secondary-fixed-dim": "#baccb3",
+                    "on-primary-fixed": "#0a2100",
+                    "on-primary-container": "#ffffff",
+                    "on-surface-variant": "#44483e",
+                    "secondary": "#53634e",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#fbfbf9",
+                    "surface-tint": "#38761d",
+                    "primary-container": "#38761d",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#111f0f",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#83a0af",
+                    "on-secondary-fixed-variant": "#3c4b37",
+                    "surface-container": "#f0f0ed",
+                    "on-error": "#ffffff",
+                    "outline-variant": "#c4c8ba",
+                    "secondary-fixed": "#d6e6d1",
+                    "surface-dim": "#dbdbd8",
+                    "on-tertiary-fixed-variant": "#2e4b57",
+                    "inverse-surface": "#30312d",
+                    "on-background": "#1b1c18",
+                    "primary": "#38761d",
+                    "inverse-primary": "#9dd67d",
+                    "tertiary": "#00222d",
+                    "on-secondary-fixed": "#111f0f",
+                    "surface-variant": "#e1e4d5",
+                    "primary-fixed-dim": "#9dd67d",
+                    "surface": "#fbfbf9",
+                    "primary-fixed": "#b8f396",
+                    "tertiary-fixed": "#c9e7f7",
+                    "tertiary-container": "#193743",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#1b1c18",
+                    "tertiary-fixed-dim": "#adcbda"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- Top Navigation Shell - TopAppBar component style -->
+<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-stone-100 flex justify-between items-center px-6 h-16">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-green-900" data-icon="park">park</span>
+<span class="font-manrope font-extrabold text-lg tracking-tighter text-green-900">Client First Capital</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center overflow-hidden border border-stone-200">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="Close up portrait of a professional businessman in a navy suit with a confident expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJnEsSxLU-UG-QlTaiAnjPls1UAcFerXOeiyBQEYB0S1shmi-35ZcAJ-0dKk6PxbjBjpaClYD3lGZVQjTmNTmTHP96T4xGdUmt7KnV3GujSC3j9qM_Dg3oxV4wese1Fc0S3J_LwjRSONmTwD6jWTWM6XAk2-p1o6Ra-Svn4DROha-dO615EEQLskRZvtWWhvph2tqK55pEYvDXw17m6g6Qhby-Y4mw-rN9c_StKfSqK3aJqX7sniyS_uYcN3y4A3eP3UKfGt5kS54"/>
+</div>
+</header>
+<main class="flex-grow pt-24 pb-32 px-6 max-w-2xl mx-auto w-full">
+<!-- Progress Indicator -->
+<div class="mb-10">
+<div class="flex justify-between items-end mb-4">
+<div>
+<span class="text-primary font-bold font-label text-xs uppercase tracking-widest">Verification</span>
+<h1 class="text-2xl font-extrabold text-on-surface mt-1">KYC Documents</h1>
+</div>
+<span class="text-on-surface font-semibold text-sm">Step 3 <span class="text-outline font-medium">of 3</span></span>
+</div>
+<div class="h-1 w-full bg-surface-container-high rounded-full overflow-hidden flex">
+<div class="h-full bg-primary rounded-full w-full"></div>
+</div>
+</div>
+<!-- Secure Notice -->
+<div class="mb-8 p-4 bg-secondary-container/30 border border-secondary-container rounded-lg flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-0.5" data-icon="verified_user">verified_user</span>
+<div>
+<p class="font-bold text-on-secondary-container text-sm">Bank-Grade Encryption</p>
+<p class="text-on-surface-variant text-xs leading-relaxed mt-0.5">Your documents are encrypted and stored in a secure digital vault. Only authorized compliance officers can review them.</p>
+</div>
+</div>
+<!-- Upload Grid -->
+<div class="space-y-6">
+<!-- PAN Card -->
+<div class="bg-white border border-stone-200 p-6 rounded-lg transition-all shadow-sm">
+<div class="flex items-start gap-4 mb-6">
+<div class="w-10 h-10 rounded bg-stone-50 border border-stone-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="badge">badge</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">PAN Card</h3>
+<p class="text-on-surface-variant text-sm mt-0.5">Upload the front side of your Permanent Account Number card.</p>
+</div>
+</div>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-8 flex flex-col items-center justify-center bg-stone-50 hover:bg-stone-100 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-outline mb-2 text-3xl group-hover:text-primary transition-colors" data-icon="cloud_upload">cloud_upload</span>
+<p class="text-sm font-bold text-on-surface">Click to upload or drag and drop</p>
+<p class="text-[10px] text-outline mt-1 uppercase tracking-wider">PDF, JPEG, or PNG (Max 5MB)</p>
+</div>
+</div>
+<!-- Aadhaar Card -->
+<div class="bg-white border border-stone-200 p-6 rounded-lg transition-all shadow-sm">
+<div class="flex items-start gap-4 mb-6">
+<div class="w-10 h-10 rounded bg-stone-50 border border-stone-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="id_card">id_card</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Aadhaar Card</h3>
+<p class="text-on-surface-variant text-sm mt-0.5">Please provide both front and back sides of your Aadhaar.</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-6 flex flex-col items-center justify-center bg-stone-50 hover:bg-stone-100 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-outline mb-2 group-hover:text-primary transition-colors" data-icon="add_photo_alternate">add_photo_alternate</span>
+<p class="text-xs font-bold text-on-surface">Front Side</p>
+</div>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-6 flex flex-col items-center justify-center bg-stone-50 hover:bg-stone-100 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-outline mb-2 group-hover:text-primary transition-colors" data-icon="add_photo_alternate">add_photo_alternate</span>
+<p class="text-xs font-bold text-on-surface">Back Side</p>
+</div>
+</div>
+</div>
+<!-- Address Proof -->
+<div class="bg-white border border-stone-200 p-6 rounded-lg transition-all shadow-sm">
+<div class="flex items-start gap-4 mb-6">
+<div class="w-10 h-10 rounded bg-stone-50 border border-stone-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="receipt_long">receipt_long</span>
+</div>
+<div>
+<h3 class="font-bold text-on-surface">Address Proof</h3>
+<p class="text-on-surface-variant text-sm mt-0.5">Utility Bill (Electricity, Water), Rent Agreement, or Voter ID.</p>
+</div>
+</div>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-8 flex flex-col items-center justify-center bg-stone-50 hover:bg-stone-100 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-outline mb-2 text-3xl group-hover:text-primary transition-colors" data-icon="upload_file">upload_file</span>
+<p class="text-sm font-bold text-on-surface">Upload Proof of Address</p>
+<p class="text-[10px] text-outline mt-1 uppercase tracking-wider">Document should not be older than 3 months</p>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-12 flex flex-col gap-3">
+<button class="w-full h-14 rounded-lg font-extrabold text-white bg-primary hover:bg-green-800 shadow-md transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                Submit Application
+                <span class="material-symbols-outlined text-lg" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+<button class="w-full h-14 rounded-lg font-bold text-primary bg-stone-100 hover:bg-stone-200 transition-all active:scale-[0.98] flex items-center justify-center gap-2 border border-stone-200">
+<span class="material-symbols-outlined text-lg" data-icon="arrow_back">arrow_back</span>
+                Back to Step 2
+            </button>
+</div>
+<!-- Regulatory Footer -->
+<div class="mt-16 text-center">
+<p class="text-outline text-[11px] leading-relaxed font-medium uppercase tracking-widest">
+                By submitting, you agree to our Terms of Service and Privacy Policy.<br/>
+                Client First Capital is a SEBI registered entity.
+            </p>
+</div>
+</main>
+<!-- Bottom Navigation Shell - BottomNavBar component style -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-white/90 backdrop-blur-lg border-t border-stone-100 shadow-[0_-4px_20px_rgba(0,0,0,0.03)]">
+<div class="flex flex-col items-center justify-center text-stone-400 font-['Manrope'] text-[11px] font-semibold uppercase tracking-widest">
+<span class="material-symbols-outlined mb-1" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 font-['Manrope'] text-[11px] font-semibold uppercase tracking-widest">
+<span class="material-symbols-outlined mb-1" data-icon="group_add">group_add</span>
+<span>Referrals</span>
+</div>
+<div class="flex flex-col items-center justify-center text-green-900 font-['Manrope'] text-[11px] font-bold uppercase tracking-widest">
+<div class="bg-green-900 text-white p-2 rounded-lg mb-1 flex items-center justify-center">
+<span class="material-symbols-outlined !text-lg" data-icon="campaign" style="font-variation-settings: 'FILL' 1;">campaign</span>
+</div>
+<span>Marketing</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 font-['Manrope'] text-[11px] font-semibold uppercase tracking-widest">
+<span class="material-symbols-outlined mb-1" data-icon="account_circle">account_circle</span>
+<span>Profile</span>
+</div>
+</nav>
+</body></html>

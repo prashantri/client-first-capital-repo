@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f9f9f9",
+                        "tertiary-fixed-dim": "#eec209",
+                        "surface-container-high": "#e8e8e8",
+                        "on-primary-fixed": "#062100",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f3f3f3",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "on-primary-container": "#b4fb91",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c1c9b7",
+                        "primary": "#1f5d01",
+                        "surface-variant": "#e2e2e2",
+                        "outline": "#717a6a",
+                        "secondary-container": "#e1e3e5",
+                        "on-background": "#1a1c1c",
+                        "on-tertiary-container": "#4e3d00",
+                        "surface-container-highest": "#e2e2e2",
+                        "surface": "#f9f9f9",
+                        "on-primary-fixed-variant": "#1a5200",
+                        "on-secondary-fixed": "#191c1e",
+                        "primary-container": "#38761d",
+                        "on-surface": "#1a1c1c",
+                        "on-secondary-fixed-variant": "#444749",
+                        "surface-tint": "#2e6c13",
+                        "primary-fixed-dim": "#94d873",
+                        "error": "#ba1a1a",
+                        "background": "#f9f9f9",
+                        "secondary-fixed": "#e1e3e5",
+                        "on-surface-variant": "#41493b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2f3131",
+                        "inverse-on-surface": "#f1f1f1",
+                        "tertiary-container": "#cea700",
+                        "on-secondary-container": "#626567",
+                        "surface-container": "#eeeeee",
+                        "primary-fixed": "#aff58c",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#c5c7c9",
+                        "surface-dim": "#dadada",
+                        "on-tertiary-fixed": "#231b00",
+                        "tertiary": "#735c00",
+                        "secondary": "#5c5f61",
+                        "inverse-primary": "#94d873",
+                        "tertiary-fixed": "#ffe084"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .tonal-shift-no-border { border: none !important; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top App Bar (Shared Component) -->
+<header class="fixed top-0 w-full bg-white/70 dark:bg-zinc-950/70 backdrop-blur-xl z-50 transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<div class="text-green-800 dark:text-green-500">
+<span class="material-symbols-outlined text-2xl" data-icon="account_balance">account_balance</span>
+</div>
+<h1 class="font-['Manrope'] tracking-tight font-bold text-xl tracking-tighter text-green-900 dark:text-green-100">
+                    Client First Capital
+                </h1>
+</div>
+<button class="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow pt-24 pb-12 px-6 max-w-md mx-auto w-full flex flex-col justify-center">
+<!-- Branding Section -->
+<div class="mb-10 text-center flex flex-col items-center">
+<div class="w-24 h-24 mb-6 rounded-2xl overflow-hidden shadow-lg bg-white p-2">
+<img alt="Client First Capital tree logo" class="w-full h-full object-contain" data-alt="Client First Capital tree logo" src="https://lh3.googleusercontent.com/aida/ADBb0ugyxAXELHpRYNjIw3tKTAXL7nC9ZdqDxj2bcXMZbLm2vrOfJHg7PenjK98CKGWxe_pNt1roiS7VmyA8XjIwE57wWfDgXzRAe2yIV4u43SOoJ-D-HAqWApUglec1fNdbTH-erkc65xWHvHT1Bj7Gbs1_ePQSNIXgLrWw_6nQwVP21uzaWVyd4WGGfSps-q2CqYzJlJOgLXf6zPMeIxyB3-v1IsyP1TU1XatzfKltaFHvcjLJNSA3GG-p8JsBDhKO3D9gJa2dFM9c"/>
+</div>
+<h2 class="font-headline text-3xl font-extrabold text-primary mb-2 tracking-tight">Your Trust, Our Asset</h2>
+<p class="text-secondary text-sm leading-relaxed max-w-[280px]">
+                We create wealth by making your money work hard so you can make your dreams and aspirations come true.
+            </p>
+</div>
+<!-- High-End Performance Highlight (Bento Grid Style) -->
+<div class="mb-10">
+<div class="bg-primary-container rounded-xl p-6 relative overflow-hidden shadow-xl shadow-primary/10">
+<!-- Subtle Grain Texture Overlay -->
+<div class="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="trending_up" data-weight="fill" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+<span class="font-headline text-[10px] font-extrabold uppercase tracking-[0.2em] text-on-primary-container opacity-80">Institutional Performance</span>
+</div>
+<h3 class="font-headline text-on-primary-container text-lg font-bold mb-3 leading-snug">Founder's Portfolio Excellence</h3>
+<p class="text-on-primary-container/90 text-sm leading-relaxed font-medium">
+                        In 2020 our Founder’s Portfolio outperformed the <span class="text-white font-bold">S&amp;P 500 by ~16%</span>, the EAFE Index by 22%, and the Vanguard Total World Index by 20%.
+                    </p>
+<!-- Decorative Element -->
+<div class="mt-4 pt-4 border-t border-on-primary-container/20 flex justify-between items-center">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-primary-container bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="professional male executive portrait close up" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCW2kcpt5czDnkCpmB_SVJnid3xpC_hvwMzzHszy6ja6jRGzpc2OQwhZ7yahHG4vPUgq-5cUg0xjB_MU7t7qk_bA-XlXzsYVdn1DgwJSf2MzvEnNb8QUfIwax62sFCwVaEwtHa-DYggNSJRCQiMOJSwd7aQyVbHMF0VWoQ2b3QbfwFO3HJDSzZJsyWJ9JPQ7YYKhRoQ-0enycGQVgXlZlhAoWOmOCPACZgELdbh-ZfM8MtQuN-BEUs9YpnJO43JAtapPYxXCX_KZ9M"/>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-primary-container bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="professional female advisor portrait close up" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYpM3fGaI7ffTvG8omlOoD3X3ixuqKEx-BhQ3fAgcHDXvza2MCf2dmVAbW3oWHflJ3ev66ngp-c7-TcKF24ujeFZRQh8D5EA00_EHpFfXPwgOdmX2Dc_b9FrIQIwEZtndJC2tj239X_1ZOhs9ksBiwmxhAEew-r316oj7jFSA1el6arJeEIoblkCUfqwY_jAEolfjytKpdEcs8rw8bDggn68S-qP0AfzwijwMg9f-Pdz9Q7N_z9YYzBVGS149aUrhUaRutY2wSKaI"/>
+</div>
+</div>
+<span class="text-[10px] font-bold text-on-primary-container/70">JOIN 500+ INVESTORS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-4">
+<button class="w-full bg-tertiary text-on-tertiary py-4 rounded-lg font-headline font-bold text-sm tracking-wide uppercase shadow-lg shadow-tertiary/20 hover:bg-tertiary-container transition-all active:scale-[0.98]">
+                Login
+            </button>
+<button class="w-full bg-surface-container-lowest text-primary py-4 rounded-lg font-headline font-bold text-sm tracking-wide uppercase border border-primary/10 hover:bg-surface-container-low transition-all active:scale-[0.98]">
+                Become an Introducer
+            </button>
+</div>
+</main>
+<!-- Clean Institutional Footer -->
+<footer class="mt-auto py-10 px-6 pb-safe border-t border-outline-variant/30 flex flex-col items-center gap-6">
+<div class="flex flex-wrap justify-center gap-x-8 gap-y-2">
+<a class="text-[11px] font-label font-semibold uppercase tracking-widest text-secondary hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-[11px] font-label font-semibold uppercase tracking-widest text-secondary hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-[11px] font-label font-semibold uppercase tracking-widest text-secondary hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<p class="text-[10px] font-label text-outline/60 uppercase tracking-widest">
+            © 2026 Client First Capital. All rights reserved.
+        </p>
+</footer>
+</body></html>

@@ -1,0 +1,13 @@
+
+
+We need to develop the backend using Node/Typescript,
+mongodb database,  
+-client-first-backend (controller,service,repsoitory-models)
+-client-first-admin-panel(ReactJs, Typescript)
+-client-first-seed-db - mongodb-connection, desing the seed database firs 
+
+
+prashantrahulkar_db_user
+wQHbJQfAw2oJV0lt
+
+mongodb+srv://client_first_db_user:wQHbJQfAw2oJV0lt@cluster0.niwyulv.mongodb.net/?appName=Cluster0

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KYC Application Review - Client First Capital</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f7f7f6",
+                    "surface-container-high": "#ebeae8",
+                    "inverse-on-surface": "#f5f4f2",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#fed65b",
+                    "background": "#fcfcfb",
+                    "on-tertiary-fixed": "#001f2a",
+                    "surface-container-highest": "#e5e4e1",
+                    "on-primary-fixed-variant": "#263e1d",
+                    "outline": "#797871",
+                    "secondary-fixed-dim": "#e9c349",
+                    "on-primary-fixed": "#0a1f04",
+                    "on-primary-container": "#b0d1a4",
+                    "on-surface-variant": "#494740",
+                    "secondary": "#735c00",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#fcfcfb",
+                    "surface-tint": "#38761d",
+                    "primary-container": "#1b3d11",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#745c00",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-container": "#83a0af",
+                    "on-secondary-fixed-variant": "#574500",
+                    "surface-container": "#f1f0ee",
+                    "on-error": "#ffffff",
+                    "outline-variant": "#c9c7be",
+                    "secondary-fixed": "#ffe088",
+                    "surface-dim": "#e0dfdb",
+                    "on-tertiary-fixed-variant": "#2e4b57",
+                    "inverse-surface": "#32302d",
+                    "on-background": "#1c1c1a",
+                    "primary": "#38761d",
+                    "inverse-primary": "#9dd18a",
+                    "tertiary": "#00222d",
+                    "on-secondary-fixed": "#241a00",
+                    "surface-variant": "#e5e4e1",
+                    "primary-fixed-dim": "#9dd18a",
+                    "surface": "#fcfcfb",
+                    "primary-fixed": "#b8eba4",
+                    "tertiary-fixed": "#c9e7f7",
+                    "tertiary-container": "#193743",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#1c1c1a",
+                    "tertiary-fixed-dim": "#adcbda"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfcfb;
+            color: #1c1c1a;
+        }
+        h1, h2, h3 {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar (Based on COMPONENTS_16) -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl border-b border-stone-100 dark:border-stone-800">
+<div class="flex items-center justify-center px-6 h-16 w-full max-w-full">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary" data-icon="park">park</span>
+<h1 class="text-lg font-extrabold tracking-tighter text-[#1b3d11] dark:text-green-50 font-headline uppercase">Client First Capital</h1>
+</div>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center px-6 pt-24 pb-12">
+<!-- Success Canvas -->
+<div class="max-w-md w-full text-center">
+<!-- Institutional Icon Section -->
+<div class="relative inline-flex items-center justify-center mb-10">
+<!-- Tonal Layering for Institutional Depth -->
+<div class="absolute inset-0 bg-secondary-container/10 rounded-full scale-150 blur-3xl"></div>
+<div class="relative w-32 h-32 rounded-full bg-surface-container-lowest flex items-center justify-center shadow-[0_12px_40px_rgba(56,118,29,0.08)] ring-1 ring-stone-100">
+<div class="w-24 h-24 rounded-full bg-primary/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-primary" data-icon="pending_actions">pending_actions</span>
+</div>
+</div>
+</div>
+<!-- Content Hierarchy -->
+<div class="space-y-4 mb-10">
+<h2 class="text-3xl font-extrabold text-primary-container tracking-tight font-headline">Request Under Review</h2>
+<p class="text-on-surface-variant text-base leading-relaxed max-w-[340px] mx-auto font-body">
+                    Thank you for your application. Our underwriting team is currently conducting a thorough review. You will be notified of our decision shortly.
+                </p>
+</div>
+<!-- Institutional Status Block -->
+<div class="bg-surface-container rounded-lg p-6 mb-12 text-left space-y-5 ring-1 ring-stone-200/50">
+<div class="flex justify-between items-center">
+<span class="text-[11px] font-bold text-outline font-label uppercase tracking-widest">Current Status</span>
+<span class="bg-secondary-container text-secondary-fixed-dim bg-opacity-20 text-secondary px-3 py-1 rounded font-bold font-label text-[10px] uppercase tracking-widest ring-1 ring-secondary/20">In Progress</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[11px] font-bold text-outline font-label uppercase tracking-widest">Application Reference</span>
+<span class="text-primary-container font-mono text-sm font-semibold">#CFC-882190</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-[11px] font-bold text-outline font-label uppercase tracking-widest">Estimated Resolution</span>
+<span class="text-primary-container font-bold text-sm">1-2 Business Days</span>
+</div>
+</div>
+<!-- Action Cluster -->
+<div class="space-y-4">
+<button class="w-full bg-primary hover:opacity-90 text-on-primary font-bold py-4 px-8 rounded uppercase tracking-widest text-xs transition-all active:scale-[0.98] shadow-md">
+                    Return to Dashboard
+                </button>
+<button class="w-full bg-transparent text-primary font-bold py-4 px-8 rounded border border-outline-variant hover:bg-surface-container-low transition-all uppercase tracking-widest text-xs">
+                    View Submission Details
+                </button>
+</div>
+<!-- Trust Indicator -->
+<div class="mt-16 flex items-center justify-center space-x-2 text-outline">
+<span class="material-symbols-outlined text-base" data-icon="verified_user">verified_user</span>
+<span class="text-[10px] font-bold uppercase tracking-[0.2em] font-label">Bank-Level Security &amp; Encryption</span>
+</div>
+</div>
+</main>
+<!-- Support Footer -->
+<footer class="p-8 text-center bg-surface-container-low border-t border-stone-200/50">
+<p class="text-xs text-on-surface-variant font-body tracking-wide">
+            Requiring assistance? Contact our <a class="text-primary font-bold hover:underline decoration-secondary-container underline-offset-4" href="#">Institutional Concierge</a>
+</p>
+</footer>
+<!-- Decorative Elements for Institutional Tone -->
+<div class="fixed top-0 left-0 w-full h-full -z-10 overflow-hidden pointer-events-none opacity-40">
+<div class="absolute -top-[15%] -left-[10%] w-[50%] h-[50%] bg-primary-fixed/10 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[5%] right-[5%] w-[40%] h-[40%] bg-secondary-fixed/10 rounded-full blur-[120px]"></div>
+</div>
+</body></html>

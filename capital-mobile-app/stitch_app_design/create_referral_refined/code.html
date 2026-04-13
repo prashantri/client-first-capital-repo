@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "surface-container-low": "#f5f5f4",
+              "surface-container-high": "#e7e5e4",
+              "inverse-on-surface": "#f5f5f4",
+              "on-primary": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "secondary-container": "#fef3c7",
+              "background": "#fafaf9",
+              "on-tertiary-fixed": "#022c22",
+              "surface-container-highest": "#d6d3d1",
+              "on-primary-fixed-variant": "#14532d",
+              "outline": "#78716c",
+              "secondary-fixed-dim": "#fcd34d",
+              "on-primary-fixed": "#052e16",
+              "on-primary-container": "#166534",
+              "on-surface-variant": "#57534e",
+              "secondary": "#92400e",
+              "on-secondary": "#ffffff",
+              "surface-bright": "#fafaf9",
+              "surface-tint": "#38761d",
+              "primary-container": "#dcfce7",
+              "error": "#b91c1c",
+              "on-tertiary": "#ffffff",
+              "on-secondary-container": "#451a03",
+              "error-container": "#fee2e2",
+              "on-tertiary-container": "#064e3b",
+              "on-secondary-fixed-variant": "#78350f",
+              "surface-container": "#f5f5f4",
+              "on-error": "#ffffff",
+              "outline-variant": "#e7e5e4",
+              "secondary-fixed": "#fde68a",
+              "surface-dim": "#e7e5e4",
+              "on-tertiary-fixed-variant": "#065f46",
+              "inverse-surface": "#292524",
+              "on-background": "#1c1917",
+              "primary": "#38761d",
+              "inverse-primary": "#86efac",
+              "tertiary": "#065f46",
+              "on-secondary-fixed": "#451a03",
+              "surface-variant": "#e7e5e4",
+              "primary-fixed-dim": "#86efac",
+              "surface": "#fafaf9",
+              "primary-fixed": "#dcfce7",
+              "tertiary-fixed": "#ccfbf1",
+              "tertiary-container": "#ccfbf1",
+              "on-error-container": "#7f1d1d",
+              "on-surface": "#1c1917",
+              "tertiary-fixed-dim": "#99f6e4",
+              "growth-accent": "#E9C349"
+            },
+            "borderRadius": {
+              "DEFAULT": "0px",
+              "lg": "0px",
+              "xl": "0px",
+              "full": "0px"
+            },
+            "fontFamily": {
+              "headline": ["Manrope"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            min-height: 100dvh;
+        }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface">
+<!-- TopAppBar Component (from COMPONENTS_16) -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl flex items-center justify-between px-6 h-16 w-full max-w-full">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-10 h-10 hover:opacity-80 transition-opacity active:scale-95 duration-150">
+<span class="material-symbols-outlined text-green-900 dark:text-green-500">arrow_back</span>
+</button>
+<h1 class="font-headline font-bold tracking-tight text-green-900 dark:text-green-50">New Referral</h1>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-stone-100 dark:bg-stone-800 overflow-hidden">
+<img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdcrcC9Oc5jEIGk06Mf9ryWzl_OJFVyo31yJvTiQbnR4BP33-1GUHFh1lw_N5yIzboKwi92zLjt_rbxta6njuq1-fq_XXDhg0XDkq6-Sfe0gdmUl6Hs9VVd6yYZv3lnqHVc3udiUNd7Qo3YdiYhN-G5_ociCLsHIsSOeYwMDC3VUHRm7RetoqBrl88mENqKCaAsN6I_qv7M5QXZ7ja5C2CsH2-bYOUWO8EHpQAQnoCMfcFgRIRDVtE10sGKpUS5K5PnTsp2vaYJ4Q"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto">
+<div class="mb-12 flex flex-col items-center md:items-start text-center md:text-left">
+<div class="inline-flex items-center px-3 py-1 bg-secondary-fixed text-on-secondary-fixed-variant text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
+                Partner Portal
+            </div>
+<h2 class="font-headline text-4xl font-extrabold text-green-900 mb-3 tracking-tight">Submit New Opportunity</h2>
+<p class="text-on-surface-variant max-w-md text-sm leading-relaxed">Provide the details of your client below. Our institutional private banking team will initiate contact within 24 hours.</p>
+</div>
+<section class="space-y-8">
+<div class="bg-surface-container-lowest p-8 border border-stone-100 shadow-sm">
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block font-label text-[10px] font-bold text-stone-500 uppercase tracking-[0.15em] px-1">Client Name</label>
+<div class="relative flex items-center">
+<input class="w-full bg-stone-50 border border-stone-200 px-4 py-3 text-on-surface placeholder:text-stone-300 focus:ring-0 focus:border-green-800 transition-colors" placeholder="Full legal name" type="text"/>
+<span class="material-symbols-outlined absolute right-4 text-stone-300 text-lg">person</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block font-label text-[10px] font-bold text-stone-500 uppercase tracking-[0.15em] px-1">Phone Number</label>
+<div class="relative flex items-center">
+<input class="w-full bg-stone-50 border border-stone-200 px-4 py-3 text-on-surface placeholder:text-stone-300 focus:ring-0 focus:border-green-800 transition-colors" placeholder="+1 (555) 000-0000" type="tel"/>
+<span class="material-symbols-outlined absolute right-4 text-stone-300 text-lg">call</span>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block font-label text-[10px] font-bold text-stone-500 uppercase tracking-[0.15em] px-1">Email Address</label>
+<div class="relative flex items-center">
+<input class="w-full bg-stone-50 border border-stone-200 px-4 py-3 text-on-surface placeholder:text-stone-300 focus:ring-0 focus:border-green-800 transition-colors" placeholder="client@example.com" type="email"/>
+<span class="material-symbols-outlined absolute right-4 text-stone-300 text-lg">mail</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block font-label text-[10px] font-bold text-stone-500 uppercase tracking-[0.15em] px-1">Service Type</label>
+<div class="relative flex items-center">
+<select class="w-full appearance-none bg-stone-50 border border-stone-200 px-4 py-3 text-on-surface focus:ring-0 focus:border-green-800 transition-colors cursor-pointer">
+<option disabled="" selected="" value="">Select financial service...</option>
+<option value="loan">Structured Loan</option>
+<option value="investment">Wealth Management / Investment</option>
+<option value="insurance">Premium Life Insurance</option>
+<option value="tax">Tax Optimization Strategy</option>
+<option value="estate">Estate Planning</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 text-stone-300 pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block font-label text-[10px] font-bold text-stone-500 uppercase tracking-[0.15em] px-1">Notes</label>
+<div class="relative">
+<textarea class="w-full bg-stone-50 border border-stone-200 px-4 py-3 text-on-surface placeholder:text-stone-300 focus:ring-0 focus:border-green-800 transition-colors resize-none" placeholder="Mention any specific goals or timeframes..." rows="4"></textarea>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full bg-growth-accent text-green-950 font-headline font-extrabold py-4 uppercase tracking-widest text-xs hover:opacity-90 active:scale-[0.99] transition-all flex justify-center items-center gap-3" type="submit">
+<span>Submit Referral</span>
+<span class="material-symbols-outlined text-base">send</span>
+</button>
+</div>
+</form>
+</div>
+<div class="flex items-center gap-4 p-5 bg-stone-100 border border-stone-200">
+<div class="w-10 h-10 bg-green-900 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div class="flex-1">
+<h4 class="text-xs font-bold text-green-900 uppercase tracking-wider mb-0.5">Confidential Protocol</h4>
+<p class="text-[11px] text-stone-500 leading-relaxed font-medium">All client data is encrypted and handled under strict institutional privacy standards of Client First Capital.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Component (from COMPONENTS_16) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white/90 dark:bg-stone-950/90 backdrop-blur-lg border-t border-stone-100 dark:border-stone-800 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] flex justify-around items-center px-4 pb-safe h-20 md:hidden">
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-700 dark:hover:text-green-300 transition-transform active:translate-y-[-2px]">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-headline text-[11px] font-semibold uppercase tracking-widest mt-1">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-green-900 dark:text-green-400 font-bold hover:text-green-700 dark:hover:text-green-300 transition-transform active:translate-y-[-2px]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group_add</span>
+<span class="font-headline text-[11px] font-semibold uppercase tracking-widest mt-1">Referrals</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-700 dark:hover:text-green-300 transition-transform active:translate-y-[-2px]">
+<span class="material-symbols-outlined">campaign</span>
+<span class="font-headline text-[11px] font-semibold uppercase tracking-widest mt-1">Marketing</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-700 dark:hover:text-green-300 transition-transform active:translate-y-[-2px]">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-headline text-[11px] font-semibold uppercase tracking-widest mt-1">Profile</span>
+</div>
+</nav>
+</body></html>

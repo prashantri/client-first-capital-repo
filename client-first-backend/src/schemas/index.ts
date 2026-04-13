@@ -1,0 +1,14 @@
+export { User, UserSchema } from './user.schema';
+export { Referral, ReferralSchema } from './referral.schema';
+export { Commission, CommissionSchema } from './commission.schema';
+export { Portfolio, PortfolioSchema } from './portfolio.schema';
+export { Goal, GoalSchema } from './goal.schema';
+export { Appointment, AppointmentSchema } from './appointment.schema';
+export { KycApplication, KycApplicationSchema } from './kyc-application.schema';
+export { MarketingAsset, MarketingAssetSchema } from './marketing-asset.schema';
+export { LeaderboardEntry, LeaderboardEntrySchema } from './leaderboard-entry.schema';
+export { CompanyValuation, CompanyValuationSchema } from './company-valuation.schema';
+export { Shareholding, ShareholdingSchema } from './shareholding.schema';
+export { EducationContent, EducationContentSchema } from './education-content.schema';
+export { ComplianceChecklist, ComplianceChecklistSchema } from './compliance-checklist.schema';
+export { Notification, NotificationSchema } from './notification.schema';

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "surface-container-low": "#f7f7f5",
+              "surface-container-high": "#ebebe8",
+              "inverse-on-surface": "#f5f5f2",
+              "on-primary": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "secondary-container": "#f1c40f",
+              "background": "#fafaf9",
+              "on-tertiary-fixed": "#0a1d12",
+              "surface-container-highest": "#e2e2de",
+              "on-primary-fixed-variant": "#1d3a1a",
+              "outline": "#787870",
+              "secondary-fixed-dim": "#d4af37",
+              "on-primary-fixed": "#051204",
+              "on-primary-container": "#e8f5e9",
+              "on-surface-variant": "#4a4a44",
+              "secondary": "#d4af37",
+              "on-secondary": "#ffffff",
+              "surface-bright": "#fafaf9",
+              "surface-tint": "#38761D",
+              "primary-container": "#1d3a1a",
+              "error": "#ba1a1a",
+              "on-tertiary": "#ffffff",
+              "on-secondary-container": "#241d00",
+              "error-container": "#ffdad6",
+              "on-tertiary-container": "#b4ccbe",
+              "on-secondary-fixed-variant": "#574500",
+              "surface-container": "#f0f0ed",
+              "on-error": "#ffffff",
+              "outline-variant": "#c9c9c1",
+              "secondary-fixed": "#ffed4a",
+              "surface-dim": "#e2e2de",
+              "on-tertiary-fixed-variant": "#2d4e3d",
+              "inverse-surface": "#31312c",
+              "on-background": "#1c1c1a",
+              "primary": "#38761D",
+              "inverse-primary": "#96d681",
+              "tertiary": "#1d3a1a",
+              "on-secondary-fixed": "#241a00",
+              "surface-variant": "#e6e6e0",
+              "primary-fixed-dim": "#96d681",
+              "surface": "#fafaf9",
+              "primary-fixed": "#b7f39d",
+              "tertiary-fixed": "#d0efdb",
+              "tertiary-container": "#0a1d12",
+              "on-error-container": "#93000a",
+              "on-surface": "#1c1c1a",
+              "tertiary-fixed-dim": "#b4ccbe"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+            "fontFamily": {
+              "headline": ["Manrope"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body {
+          min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface">
+<!-- TopAppBar (Arbor Institutional Style) -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl shadow-sm border-b border-stone-100 dark:border-stone-800">
+<div class="flex items-center justify-between px-6 h-16 w-full max-w-full">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-green-900 dark:text-green-500 transition-all active:scale-95">menu</button>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-green-800" data-icon="park">park</span>
+<h1 class="text-lg font-extrabold tracking-tighter text-green-900 dark:text-green-50">Client First Capital</h1>
+</div>
+</div>
+<div class="relative">
+<img alt="User profile avatar" class="w-9 h-9 rounded-full object-cover border-2 border-stone-100" data-alt="Professional headshot of a financial advisor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_F6jsTrVosJYr-JRjNQIprC-sAb5NWm-uDKM5J_P5wnnpUhdPpCswTA7N7OcqMLY7qqcLKM1O9RUmmKGwYsGRzlj_qedodon7679-fW4qS5M8z74RAL2T0okPW70bN7iqMxlSI23fsUQEyIi7hF2bnTAHyIl8vJY1v4mVErZ8O0Nm_JQvT4bfX5pwpHV-e4ADVEZM1e2W3OYYeA2LuFOUMVNcyE1GY9mviFdX-tf-Ui9zHTlzAxSnDyTWqOhLGWAANKOkbB9ROMY"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-5xl mx-auto">
+<!-- Hero Greeting Section -->
+<section class="mb-10">
+<h2 class="font-headline font-extrabold text-3xl text-green-900 tracking-tight mb-2">Hello, Alexander</h2>
+<p class="text-on-surface-variant text-sm font-medium">Welcome back to your Institutional Portal. Your network overview.</p>
+</section>
+<!-- Summary Cards with Forest Green and Golden Yellow Accents -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+<!-- Total Referrals -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-stone-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+<span class="material-symbols-outlined text-green-700 mb-4" data-icon="group">group</span>
+<div>
+<p class="font-label text-[10px] font-bold uppercase tracking-[0.15em] text-on-surface-variant mb-1">Total Referrals</p>
+<p class="font-headline font-extrabold text-3xl text-green-900">124</p>
+</div>
+</div>
+<!-- Approved Leads -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-stone-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-green-800" data-icon="verified">verified</span>
+<span class="px-2 py-0.5 rounded-full bg-green-50 text-green-800 font-label text-[9px] font-bold uppercase tracking-wider">Growth</span>
+</div>
+<div>
+<p class="font-label text-[10px] font-bold uppercase tracking-[0.15em] text-on-surface-variant mb-1">Approved Leads</p>
+<p class="font-headline font-extrabold text-3xl text-green-900">85</p>
+</div>
+</div>
+<!-- Pending Leads (Golden Accent) -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-stone-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-[#d4af37]" data-icon="pending">pending</span>
+<span class="px-2 py-0.5 rounded-full bg-[#f1c40f]/10 text-[#917500] font-label text-[9px] font-bold uppercase tracking-wider">Pending</span>
+</div>
+<div>
+<p class="font-label text-[10px] font-bold uppercase tracking-[0.15em] text-on-surface-variant mb-1">Pending Leads</p>
+<p class="font-headline font-extrabold text-3xl text-green-900">22</p>
+</div>
+</div>
+<!-- Total Earnings (Forest Green Highlight) -->
+<div class="bg-green-900 p-6 rounded-xl flex flex-col justify-between shadow-[0_4px_20px_rgba(56,118,29,0.2)]">
+<span class="material-symbols-outlined text-[#f1c40f] mb-4" data-icon="payments">payments</span>
+<div>
+<p class="font-label text-[10px] font-bold uppercase tracking-[0.15em] text-green-200/80 mb-1">Total Earnings</p>
+<p class="font-headline font-extrabold text-3xl text-white">₹45,000</p>
+</div>
+</div>
+</div>
+<!-- Recent Activity Section -->
+<section class="mb-10">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline font-bold text-xl text-green-900">Recent Activity</h3>
+<button class="font-label text-xs font-bold text-green-800 uppercase tracking-widest">View All</button>
+</div>
+<div class="bg-white rounded-xl border border-stone-100 shadow-[0_2px_12px_rgba(0,0,0,0.02)] overflow-hidden">
+<!-- Activity Item 1 -->
+<div class="p-5 flex items-center gap-4 transition-colors hover:bg-stone-50">
+<div class="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-green-700 text-xl" data-icon="check_circle">check_circle</span>
+</div>
+<div class="flex-grow">
+<p class="font-bold text-sm text-green-900">John Doe - Loan Approved</p>
+<p class="text-xs text-on-surface-variant">Residential Mortgage Referral</p>
+</div>
+<span class="text-[11px] font-semibold text-stone-400">2h ago</span>
+</div>
+<div class="h-[1px] mx-5 bg-stone-100"></div>
+<!-- Activity Item 2 -->
+<div class="p-5 flex items-center gap-4 transition-colors hover:bg-stone-50">
+<div class="w-10 h-10 rounded-lg bg-stone-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-stone-600 text-xl" data-icon="description">description</span>
+</div>
+<div class="flex-grow">
+<p class="font-bold text-sm text-green-900">Jane Smith - Application Submitted</p>
+<p class="text-xs text-on-surface-variant">Wealth Management Portfolio</p>
+</div>
+<span class="text-[11px] font-semibold text-stone-400">5h ago</span>
+</div>
+<div class="h-[1px] mx-5 bg-stone-100"></div>
+<!-- Activity Item 3 -->
+<div class="p-5 flex items-center gap-4 transition-colors hover:bg-stone-50">
+<div class="w-10 h-10 rounded-lg bg-[#f1c40f]/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#917500] text-xl" data-icon="history_edu">history_edu</span>
+</div>
+<div class="flex-grow">
+<p class="font-bold text-sm text-green-900">Robert Wilson - Document Required</p>
+<p class="text-xs text-on-surface-variant">Identity verification pending</p>
+</div>
+<span class="text-[11px] font-semibold text-stone-400">1d ago</span>
+</div>
+</div>
+</section>
+<!-- Trust Indicator -->
+<div class="flex items-center justify-center gap-2 opacity-40">
+<span class="material-symbols-outlined text-[14px]" data-icon="shield">shield</span>
+<span class="font-label text-[10px] font-bold uppercase tracking-[0.2em]">Institutional Access Portal</span>
+</div>
+</main>
+<!-- FAB: Create Referral (Prominent Quick Action) -->
+<button class="fixed bottom-28 right-6 w-14 h-14 bg-green-800 text-[#f1c40f] rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(29,58,26,0.3)] z-50 transition-all active:scale-90 group">
+<span class="material-symbols-outlined text-2xl group-hover:rotate-90 transition-transform duration-500" data-icon="add">add</span>
+<span class="absolute right-full mr-4 bg-green-900 text-white text-[10px] font-bold uppercase tracking-widest py-2 px-4 rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">New Referral</span>
+</button>
+<!-- BottomNavBar (Arbor Institutional Style) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white/90 dark:bg-stone-950/90 backdrop-blur-lg border-t border-stone-100 dark:border-stone-800 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] h-20">
+<div class="flex justify-around items-center h-full px-4 pb-safe">
+<!-- Active: Dashboard -->
+<a class="flex flex-col items-center justify-center text-green-900 dark:text-green-400 font-bold tap-highlight-none active:translate-y-[-2px] transition-transform" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="dashboard">dashboard</span>
+<span class="font-headline text-[11px] font-semibold uppercase tracking-widest mt-1">Dashboard</span>
+</a>
+<!-- Inactive: Referrals -->
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-700 transition-colors tap-highlight-none active:translate-y-[-2px]" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="group_add">group_add</span>
+<span class="font-headline text-[11px] font-semibold uppercase tracking-widest mt-1">Referrals</span>
+</a>
+<!-- Inactive: Marketing -->
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-700 transition-colors tap-highlight-none active:translate-y-[-2px]" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="campaign">campaign</span>
+<span class="font-headline text-[11px] font-semibold uppercase tracking-widest mt-1">Marketing</span>
+</a>
+<!-- Inactive: Profile -->
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-700 transition-colors tap-highlight-none active:translate-y-[-2px]" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="account_circle">account_circle</span>
+<span class="font-headline text-[11px] font-semibold uppercase tracking-widest mt-1">Profile</span>
+</a>
+</div>
+</nav>
+</body></html>

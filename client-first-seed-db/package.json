@@ -1,0 +1,26 @@
+{
+  "name": "client-first-seed-db",
+  "version": "1.0.0",
+  "description": "Client First Capital - MongoDB schema design and seed data",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "seed": "ts-node src/index.ts",
+    "seed:users": "ts-node src/seeds/user.seed.ts",
+    "seed:referrals": "ts-node src/seeds/referral.seed.ts",
+    "seed:portfolios": "ts-node src/seeds/portfolio.seed.ts",
+    "seed:all": "ts-node src/index.ts --all",
+    "clean": "ts-node src/index.ts --clean"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "mongoose": "^8.5.1"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^20.14.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  }
+}

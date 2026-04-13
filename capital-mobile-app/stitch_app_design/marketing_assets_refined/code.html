@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Marketing Hub - Client First Capital</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "surface-container-low": "#f6f6f4",
+              "surface-container-high": "#ebeae6",
+              "inverse-on-surface": "#f5f5f0",
+              "on-primary": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "secondary-container": "#d4e8d0",
+              "background": "#fdfdfb",
+              "on-tertiary-fixed": "#001f2a",
+              "surface-container-highest": "#e2e2dd",
+              "on-primary-fixed-variant": "#1d3d0f",
+              "outline": "#757870",
+              "secondary-fixed-dim": "#baccb3",
+              "on-primary-fixed": "#052100",
+              "on-primary-container": "#ffffff",
+              "on-surface-variant": "#454841",
+              "secondary": "#54634d",
+              "on-secondary": "#ffffff",
+              "surface-bright": "#fdfdfb",
+              "surface-tint": "#38761d",
+              "primary-container": "#38761d",
+              "error": "#ba1a1a",
+              "on-tertiary": "#ffffff",
+              "on-secondary-container": "#121f0e",
+              "error-container": "#ffdad6",
+              "on-tertiary-container": "#001f2a",
+              "on-secondary-fixed-variant": "#3d4b37",
+              "surface-container": "#f0f0eb",
+              "on-error": "#ffffff",
+              "outline-variant": "#c5c8ba",
+              "secondary-fixed": "#d6e8ce",
+              "surface-dim": "#deded9",
+              "on-tertiary-fixed-variant": "#2e4b57",
+              "inverse-surface": "#30312c",
+              "on-background": "#1b1c18",
+              "primary": "#38761d",
+              "inverse-primary": "#9dd67d",
+              "tertiary": "#3b6470",
+              "on-secondary-fixed": "#121f0e",
+              "surface-variant": "#e1e4d5",
+              "primary-fixed-dim": "#9dd67d",
+              "surface": "#fdfdfb",
+              "primary-fixed": "#b8f396",
+              "tertiary-fixed": "#beeaf7",
+              "tertiary-container": "#beeaf7",
+              "on-error-container": "#410002",
+              "on-surface": "#1b1c18",
+              "tertiary-fixed-dim": "#a2cedb"
+            },
+            "borderRadius": {
+              "DEFAULT": "4px",
+              "lg": "8px",
+              "xl": "12px",
+              "full": "9999px"
+            },
+            "fontFamily": {
+              "headline": ["Manrope", "sans-serif"],
+              "body": ["Manrope", "sans-serif"],
+              "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl border-b border-stone-100 dark:border-stone-800">
+<div class="flex items-center justify-between px-6 h-16 w-full max-w-full">
+<div class="flex items-center gap-3">
+<button class="material-symbols-outlined text-green-900 dark:text-green-500 hover:opacity-80 transition-opacity active:scale-95 duration-150">menu</button>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-green-900 dark:text-green-500">park</span>
+<h1 class="text-lg font-extrabold tracking-tighter text-green-900 dark:text-green-50 font-headline">Client First Capital</h1>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-stone-500 hover:text-green-900 transition-colors">search</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-stone-100 border border-stone-200">
+<img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8Qj7OAFPcCGhV91pp-uMBM5GtUIgS0oTEAOZ3xffFaeaOuDdYWW9fLq6741lisZ74wJnlhQKGlGtGzLqPqUdhworL91ZG7WiSKt-J3WE6-6_bD7mzMPQnod-R3oogY-tMD1qB51ebeOlir3I1AJhukOw8D4jHBFM418XkPkBiqPLxnJLrB5Kl7Upkwe60NOmEuwWRBNcf9kV5HmghTO0ED_ebpBYV7XN0QErRj0UdXxys6anpHjNHIYEH6kmqeiMdV8IMaVWX6qQ"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-7xl mx-auto">
+<!-- Editorial Header Section -->
+<section class="mb-10">
+<h2 class="text-3xl font-headline font-bold text-green-900 tracking-tight mb-2">Marketing Hub</h2>
+<p class="text-on-surface-variant max-w-2xl leading-relaxed">Access premium brand assets and marketing materials designed to elevate your client presentations and social presence.</p>
+</section>
+<!-- Category Filter -->
+<div class="flex gap-3 mb-8 overflow-x-auto no-scrollbar pb-2">
+<button class="px-6 py-2 rounded-lg bg-primary text-white font-bold text-sm transition-all shadow-sm active:scale-95">All</button>
+<button class="px-6 py-2 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-semibold text-sm transition-all active:scale-95">Flyers</button>
+<button class="px-6 py-2 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-semibold text-sm transition-all active:scale-95">Social Media</button>
+<button class="px-6 py-2 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-semibold text-sm transition-all active:scale-95">Brochures</button>
+</div>
+<!-- Bento Grid Marketing Assets -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Asset Card 1: Home Loan Flyer -->
+<div class="bg-surface-container-lowest rounded-lg border border-stone-100 overflow-hidden group transition-all duration-300 hover:shadow-lg">
+<div class="aspect-[4/3] w-full relative overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Premium real estate brochure mockup showing a modern luxury home with clean typography and gold accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHlkNJD2l5nmoIq_O4mgq8r6WEc7N2_Qf4x7PDQ_WIVhIZeQ5TcM0CiDSsWM7G-zJ7yairGHEjzfsYdLrr5tKjq1TxerLnOZVP7KijoNhmuLSFPoMjPtsMNcUkqEb33PoECpHzdYynpp0nKoE1rc214XbJ3Y3JBQDYiwnDWbrpWsexwn2x9wB6XQlF7tqrCyvx7AHLcsQQAhPQzXzYisT7_CuEDna9hyNjquvFYXTeNGdX0cAehrWGCrQ_tVJpWWaNrOD2fX1Rktw"/>
+<div class="absolute top-4 right-4">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">New</span>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">Flyer</p>
+<h3 class="text-lg font-bold font-headline text-green-900">Home Loan Flyer</h3>
+</div>
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">more_vert</button>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-primary text-white text-sm font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm">download</span>
+                            Download
+                        </button>
+<button class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-surface-container text-on-surface text-sm font-bold transition-all hover:bg-surface-container-high active:scale-95">
+<span class="material-symbols-outlined text-sm">share</span>
+                            Share
+                        </button>
+</div>
+</div>
+</div>
+<!-- Asset Card 2: Market Insights -->
+<div class="bg-surface-container-lowest rounded-lg border border-stone-100 overflow-hidden group transition-all duration-300 hover:shadow-lg">
+<div class="aspect-[4/3] w-full relative overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Sophisticated social media template for market analysis featuring abstract blue glass shapes and clean data visualization" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxqBiibXI2lFf4edhyqhDsKmhRPSFb-zmrEp9Ax2pRpm2L58TmrVECe1VFfZFM1iCIpJSbr0oL_I2FfqGtW-b2tvV6kO2mlfQI-er5K0Gy4k061DyN9Y62OZdwMLwU2cK5peYGqUtYf9IC81g86y09whqw1Skq5iuTRTSz0TW3o9WgQiWPo11SSknKllhkfIVYIVcBru0sk0_4nrUiDGY35qav-3xxaOdcrMBd0PLuVX7Jt7_9JVr-ONAooTZH1z9IGcQ1yyNruLg"/>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">Social Media</p>
+<h3 class="text-lg font-bold font-headline text-green-900">Market Insights Pack</h3>
+</div>
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">more_vert</button>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-primary text-white text-sm font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm">download</span>
+                            Download
+                        </button>
+<button class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-surface-container text-on-surface text-sm font-bold transition-all hover:bg-surface-container-high active:scale-95">
+<span class="material-symbols-outlined text-sm">share</span>
+                            Share
+                        </button>
+</div>
+</div>
+</div>
+<!-- Asset Card 3: Retirement Planning -->
+<div class="bg-surface-container-lowest rounded-lg border border-stone-100 overflow-hidden group transition-all duration-300 hover:shadow-lg">
+<div class="aspect-[4/3] w-full relative overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Editorial style brochure cover for retirement planning showing an elegant couple in a garden setting with high-end typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuypYW3NttjuZ3XHhRFvBrLGjzK9Zni-baFcS9bMkftSmiJ5UTHERS0nA4uR9yx8VE1pK5f_iS_Y59Rr-86ctJHr7LBVebp_oaBkLjXRK0O_bzHfbnNKc55uHwwfNB1hOYWzWXzrI_3IIRRd4qUv2L7knLV5ytSvxLqoVP31tuB6CR2U6mEowbhyWv_Yadpc_tbZLtNIRhGtZJFtqvUNtLAkOMEPbJ0O-nZrMBcertXK_PFO11G8EN_5ssn3Mbz4PQ09jz_F2FTbQ"/>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">Brochure</p>
+<h3 class="text-lg font-bold font-headline text-green-900">Retirement Guide</h3>
+</div>
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">more_vert</button>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-primary text-white text-sm font-bold transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm">download</span>
+                            Download
+                        </button>
+<button class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-surface-container text-on-surface text-sm font-bold transition-all hover:bg-surface-container-high active:scale-95">
+<span class="material-symbols-outlined text-sm">share</span>
+                            Share
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-safe h-20 bg-white/90 dark:bg-stone-950/90 backdrop-blur-lg border-t border-stone-100 dark:border-stone-800 shadow-[0_-4px_20px_rgba(0,0,0,0.03)]">
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-700 dark:hover:text-green-300 transition-transform active:translate-y-[-2px]" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="font-['Manrope'] text-[11px] font-semibold uppercase tracking-widest">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-700 dark:hover:text-green-300 transition-transform active:translate-y-[-2px]" href="#">
+<span class="material-symbols-outlined mb-1">group_add</span>
+<span class="font-['Manrope'] text-[11px] font-semibold uppercase tracking-widest">Referrals</span>
+</a>
+<a class="flex flex-col items-center justify-center text-green-900 dark:text-green-400 font-bold transition-transform active:translate-y-[-2px]" href="#">
+<div class="bg-secondary-container p-2 rounded-lg mb-1">
+<span class="material-symbols-outlined text-green-900">campaign</span>
+</div>
+<span class="font-['Manrope'] text-[11px] font-bold uppercase tracking-widest">Marketing</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-green-700 dark:hover:text-green-300 transition-transform active:translate-y-[-2px]" href="#">
+<span class="material-symbols-outlined mb-1">account_circle</span>
+<span class="font-['Manrope'] text-[11px] font-semibold uppercase tracking-widest">Profile</span>
+</a>
+</nav>
+</body></html>
