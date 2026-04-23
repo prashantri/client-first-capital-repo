@@ -19,15 +19,15 @@ class _CreateReferralScreenState extends State<CreateReferralScreen> {
   final _mobileController = TextEditingController();
   final _emailController = TextEditingController();
   final _notesController = TextEditingController();
-  String? _selectedService;
+  String? _selectedService = 'Wealth Management / Investment';
   bool _isSubmitting = false;
 
   final List<String> _serviceTypes = [
-    'Structured Loan',
+//    'Structured Loan',
     'Wealth Management / Investment',
-    'Premium Life Insurance',
+  //  'Premium Life Insurance',
     'Tax Optimization Strategy',
-    'Estate Planning',
+  //  'Estate Planning',
   ];
 
   @override
