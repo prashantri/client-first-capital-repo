@@ -15,19 +15,19 @@ git pull origin main
 # ─── Backend ──────────────────────────────────────────────────────────────────
 echo "==> Building backend"
 cd client-first-backend
-npm ci --omit=dev
-npm run build          # outputs to dist/
+npm ci                 # install ALL deps — nest CLI is a devDependency, needed for build
+npm run build          # nest build → outputs to dist/
 
-echo "==> Syncing backend to $BACKEND_DIR"
-rsync -a --delete \
-  dist/ package.json package-lock.json \
-  "$BACKEND_DIR/"
+echo "==> Deploying backend to $BACKEND_DIR"
+mkdir -p "$BACKEND_DIR"
+rsync -a --delete dist/ "$BACKEND_DIR/dist/"
+cp package.json package-lock.json "$BACKEND_DIR/"
 
-# Copy .env if it exists locally (skip in CI — manage secrets separately)
+# Copy .env — manage this file directly on the server for production secrets
 [ -f .env ] && cp .env "$BACKEND_DIR/.env"
 
 cd "$BACKEND_DIR"
-npm ci --omit=dev      # install production deps in place
+npm ci --omit=dev      # install only production deps in the deploy directory
 
 # ─── Admin Panel ──────────────────────────────────────────────────────────────
 echo "==> Building admin panel"
