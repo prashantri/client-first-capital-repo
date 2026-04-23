@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:capital_mobile_app/core/theme/app_theme.dart';
+import 'package:capital_mobile_app/providers/auth_provider.dart';
+import 'package:capital_mobile_app/providers/introducer_provider.dart';
 
 class CreateReferralScreen extends StatefulWidget {
   const CreateReferralScreen({super.key});
@@ -11,11 +14,13 @@ class CreateReferralScreen extends StatefulWidget {
 
 class _CreateReferralScreenState extends State<CreateReferralScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _phoneController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _mobileController = TextEditingController();
   final _emailController = TextEditingController();
   final _notesController = TextEditingController();
   String? _selectedService;
+  bool _isSubmitting = false;
 
   final List<String> _serviceTypes = [
     'Structured Loan',
@@ -27,49 +32,153 @@ class _CreateReferralScreenState extends State<CreateReferralScreen> {
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _phoneController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _mobileController.dispose();
     _emailController.dispose();
     _notesController.dispose();
     super.dispose();
   }
 
-  void _submitReferral() {
-    if (_formKey.currentState!.validate()) {
-      showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          title: Text(
-            'Referral Submitted',
-            style: GoogleFonts.manrope(fontWeight: FontWeight.w700),
-          ),
-          content: Text(
-            'Your referral for ${_nameController.text} has been submitted. Our team will initiate contact within 24 hours.',
-            style: GoogleFonts.inter(fontSize: 14, color: AppTheme.onSurfaceVariant),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(ctx);
-                Navigator.pop(context);
-              },
-              child: Text(
-                'Done',
-                style: GoogleFonts.manrope(
-                  fontWeight: FontWeight.w700,
-                  color: AppTheme.primaryColor,
-                ),
+  void _submitReferral() async {
+    if (!_formKey.currentState!.validate() || _isSubmitting) return;
+
+    setState(() => _isSubmitting = true);
+    final provider = Provider.of<IntroducerProvider>(context, listen: false);
+
+    final fullName =
+        '${_firstNameController.text.trim()} ${_lastNameController.text.trim()}';
+    final data = {
+      'referralName': fullName,
+      'referralPhone': _mobileController.text.trim(),
+      'referralEmail': _emailController.text.trim(),
+      if (_selectedService != null) 'serviceType': _selectedService,
+      if (_notesController.text.trim().isNotEmpty)
+        'notes': _notesController.text.trim(),
+    };
+
+    final success = await provider.createReferral(data);
+    if (!mounted) return;
+    setState(() => _isSubmitting = false);
+
+    if (success) {
+      _showSuccessDialog(fullName);
+    } else {
+      final error = provider.error ?? '';
+      if (error.toLowerCase().contains('already exists') ||
+          error.toLowerCase().contains('duplicate')) {
+        _showDuplicateEmailDialog();
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(error.isNotEmpty ? error : 'Failed to submit referral')),
+        );
+      }
+    }
+  }
+
+  void _showSuccessDialog(String fullName) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        title: Row(
+          children: [
+            Container(
+              width: 32,
+              height: 32,
+              decoration: BoxDecoration(
+                color: const Color(0xFFDCFCE7),
+                borderRadius: BorderRadius.circular(8),
               ),
+              child: const Icon(Icons.check_circle, color: AppTheme.primaryColor, size: 20),
             ),
+            const SizedBox(width: 12),
+            Text('Referral Submitted', style: GoogleFonts.manrope(fontWeight: FontWeight.w700, fontSize: 16)),
           ],
         ),
-      );
-    }
+        content: Text(
+          'Your referral for $fullName has been submitted. Our team will initiate contact within 24 hours.',
+          style: GoogleFonts.inter(fontSize: 14, color: AppTheme.onSurfaceVariant, height: 1.5),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              Navigator.pop(context);
+            },
+            child: Text('Done', style: GoogleFonts.manrope(fontWeight: FontWeight.w700, color: AppTheme.primaryColor)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showDuplicateEmailDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        title: Row(
+          children: [
+            Container(
+              width: 32,
+              height: 32,
+              decoration: BoxDecoration(
+                color: const Color(0xFFFEF3C7),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Icon(Icons.warning_amber_rounded, color: Color(0xFFF59E0B), size: 20),
+            ),
+            const SizedBox(width: 12),
+            Text('Duplicate Email', style: GoogleFonts.manrope(fontWeight: FontWeight.w700, fontSize: 16)),
+          ],
+        ),
+        content: RichText(
+          text: TextSpan(
+            style: GoogleFonts.inter(fontSize: 14, color: AppTheme.onSurfaceVariant, height: 1.5),
+            children: [
+              const TextSpan(text: 'A referral with '),
+              TextSpan(
+                text: _emailController.text.trim(),
+                style: const TextStyle(fontWeight: FontWeight.w700, color: AppTheme.onSurface),
+              ),
+              const TextSpan(text: ' already exists in the system.\n\nYou can edit the details and try a different email, or cancel this referral.'),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              Navigator.pop(context);
+            },
+            style: TextButton.styleFrom(foregroundColor: const Color(0xFFB91C1C)),
+            child: Text('Cancel Referral', style: GoogleFonts.manrope(fontWeight: FontWeight.w700)),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              _emailController.clear();
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppTheme.primaryColor,
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+            ),
+            child: Text('Edit Details', style: GoogleFonts.manrope(fontWeight: FontWeight.w700)),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<AuthProvider>(context, listen: false);
+    final introducedBy = auth.user?.fullName ?? auth.user?.firstName ?? 'You';
+
     return Scaffold(
       backgroundColor: AppTheme.surface,
       body: Column(
@@ -83,7 +192,7 @@ class _CreateReferralScreenState extends State<CreateReferralScreen> {
                   const SizedBox(height: 24),
                   _buildHeader(),
                   const SizedBox(height: 32),
-                  _buildForm(),
+                  _buildForm(introducedBy),
                   const SizedBox(height: 24),
                   _buildConfidentialBanner(),
                   const SizedBox(height: 100),
@@ -99,10 +208,13 @@ class _CreateReferralScreenState extends State<CreateReferralScreen> {
 
   Widget _buildAppBar() {
     return Container(
-      padding: const EdgeInsets.only(top: 48, left: 16, right: 24, bottom: 16),
-      decoration: BoxDecoration(
-        color: Colors.white.withAlpha(204),
+      padding: const EdgeInsets.only(
+        top: 48,
+        left: 16,
+        right: 24,
+        bottom: 16,
       ),
+      decoration: BoxDecoration(color: Colors.white.withAlpha(204)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -143,7 +255,6 @@ class _CreateReferralScreenState extends State<CreateReferralScreen> {
   Widget _buildHeader() {
     return Column(
       children: [
-        // Partner Portal badge
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
           decoration: BoxDecoration(
@@ -176,7 +287,7 @@ class _CreateReferralScreenState extends State<CreateReferralScreen> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
-            'Provide the details of your client below. Our institutional private banking team will initiate contact within 24 hours.',
+            'Provide the details of your prospect below. Our institutional private banking team will initiate contact within 24 hours.',
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
               fontSize: 13,
@@ -189,7 +300,7 @@ class _CreateReferralScreenState extends State<CreateReferralScreen> {
     );
   }
 
-  Widget _buildForm() {
+  Widget _buildForm(String introducedBy) {
     return Container(
       padding: const EdgeInsets.all(28),
       decoration: BoxDecoration(
@@ -208,51 +319,141 @@ class _CreateReferralScreenState extends State<CreateReferralScreen> {
         key: _formKey,
         child: Column(
           children: [
-            _buildTextField(
-              label: 'Client Name',
-              hint: 'Full legal name',
-              controller: _nameController,
-              icon: Icons.person,
-              validator: (v) =>
-                  (v == null || v.isEmpty) ? 'Name is required' : null,
+            // Introduced By — read-only, auto-populated
+            _buildReadOnlyField(
+              label: 'INTRODUCED BY',
+              value: introducedBy,
+              icon: Icons.verified_user,
             ),
             const SizedBox(height: 20),
+
+            // First Name + Last Name side by side
+            Row(
+              children: [
+                Expanded(
+                  child: _buildTextField(
+                    label: 'FIRST NAME',
+                    hint: 'John',
+                    controller: _firstNameController,
+                    validator: (v) => (v == null || v.trim().isEmpty) ? 'Required' : null,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: _buildTextField(
+                    label: 'LAST NAME',
+                    hint: 'Smith',
+                    controller: _lastNameController,
+                    validator: (v) => (v == null || v.trim().isEmpty) ? 'Required' : null,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+
             _buildTextField(
-              label: 'Phone Number',
-              hint: '+1 (555) 000-0000',
-              controller: _phoneController,
+              label: 'MOBILE NUMBER',
+              hint: '+971 50 123 4567',
+              controller: _mobileController,
               icon: Icons.call,
               keyboardType: TextInputType.phone,
-              validator: (v) =>
-                  (v == null || v.isEmpty) ? 'Phone is required' : null,
+              validator: (v) => (v == null || v.trim().isEmpty) ? 'Mobile is required' : null,
             ),
             const SizedBox(height: 20),
+
             _buildTextField(
-              label: 'Email Address',
-              hint: 'client@example.com',
+              label: 'EMAIL ADDRESS',
+              hint: 'prospect@example.com',
               controller: _emailController,
               icon: Icons.mail,
               keyboardType: TextInputType.emailAddress,
               validator: (v) {
-                if (v == null || v.isEmpty) return 'Email is required';
-                if (!v.contains('@')) return 'Enter a valid email';
+                if (v == null || v.trim().isEmpty) return 'Email is required';
+                if (!v.contains('@') || !v.contains('.')) return 'Enter a valid email';
                 return null;
               },
             ),
             const SizedBox(height: 20),
+
             _buildServiceDropdown(),
             const SizedBox(height: 20),
+
             _buildTextField(
-              label: 'Notes',
-              hint: 'Mention any specific goals or timeframes...',
+              label: 'NOTES (OPTIONAL)',
+              hint: 'Mention any specific goals, timeframes, or context...',
               controller: _notesController,
               maxLines: 4,
             ),
             const SizedBox(height: 28),
+
             _buildSubmitButton(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildReadOnlyField({
+    required String label,
+    required String value,
+    required IconData icon,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 2, bottom: 8),
+          child: Text(
+            label,
+            style: GoogleFonts.manrope(
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              color: Colors.grey.shade500,
+              letterSpacing: 1.8,
+            ),
+          ),
+        ),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          decoration: BoxDecoration(
+            color: AppTheme.primaryColor.withAlpha(10),
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(color: AppTheme.primaryColor.withAlpha(40)),
+          ),
+          child: Row(
+            children: [
+              Icon(icon, color: AppTheme.primaryColor, size: 18),
+              const SizedBox(width: 10),
+              Text(
+                value,
+                style: GoogleFonts.manrope(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: AppTheme.primaryColor,
+                ),
+              ),
+              const Spacer(),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                decoration: BoxDecoration(
+                  color: AppTheme.primaryColor.withAlpha(20),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  'AUTO',
+                  style: GoogleFonts.manrope(
+                    fontSize: 9,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.5,
+                    color: AppTheme.primaryColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -271,7 +472,7 @@ class _CreateReferralScreenState extends State<CreateReferralScreen> {
         Padding(
           padding: const EdgeInsets.only(left: 2, bottom: 8),
           child: Text(
-            label.toUpperCase(),
+            label,
             style: GoogleFonts.manrope(
               fontSize: 10,
               fontWeight: FontWeight.w700,
@@ -288,10 +489,7 @@ class _CreateReferralScreenState extends State<CreateReferralScreen> {
           style: GoogleFonts.inter(fontSize: 14, color: AppTheme.onSurface),
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: GoogleFonts.inter(
-              fontSize: 14,
-              color: Colors.grey.shade300,
-            ),
+            hintStyle: GoogleFonts.inter(fontSize: 14, color: Colors.grey.shade300),
             filled: true,
             fillColor: Colors.grey.shade50,
             border: OutlineInputBorder(
@@ -310,10 +508,11 @@ class _CreateReferralScreenState extends State<CreateReferralScreen> {
               borderRadius: BorderRadius.circular(4),
               borderSide: const BorderSide(color: Color(0xFFB91C1C)),
             ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 14,
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(4),
+              borderSide: const BorderSide(color: Color(0xFFB91C1C), width: 1),
             ),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             suffixIcon: icon != null
                 ? Icon(icon, color: Colors.grey.shade300, size: 20)
                 : null,
@@ -362,10 +561,7 @@ class _CreateReferralScreenState extends State<CreateReferralScreen> {
               borderRadius: BorderRadius.circular(4),
               borderSide: BorderSide(color: AppTheme.primaryColor, width: 1),
             ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 14,
-            ),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           ),
           validator: (v) => v == null ? 'Please select a service' : null,
           items: _serviceTypes
@@ -381,31 +577,35 @@ class _CreateReferralScreenState extends State<CreateReferralScreen> {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: _submitReferral,
+        onPressed: _isSubmitting ? null : _submitReferral,
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFFE9C349),
           foregroundColor: const Color(0xFF1A2E05),
           padding: const EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
           elevation: 0,
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'SUBMIT REFERRAL',
-              style: GoogleFonts.manrope(
-                fontSize: 12,
-                fontWeight: FontWeight.w800,
-                letterSpacing: 2,
+        child: _isSubmitting
+            ? const SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(strokeWidth: 2, color: Color(0xFF1A2E05)),
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'SUBMIT REFERRAL',
+                    style: GoogleFonts.manrope(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 2,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  const Icon(Icons.send, size: 16),
+                ],
               ),
-            ),
-            const SizedBox(width: 10),
-            const Icon(Icons.send, size: 16),
-          ],
-        ),
       ),
     );
   }
@@ -465,9 +665,7 @@ class _CreateReferralScreenState extends State<CreateReferralScreen> {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white.withAlpha(230),
-        border: Border(
-          top: BorderSide(color: Colors.grey.shade100),
-        ),
+        border: Border(top: BorderSide(color: Colors.grey.shade100)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withAlpha(8),
@@ -499,8 +697,7 @@ class _CreateReferralScreenState extends State<CreateReferralScreen> {
     );
   }
 
-  Widget _buildNavItem(
-      IconData icon, String label, bool isActive, VoidCallback onTap) {
+  Widget _buildNavItem(IconData icon, String label, bool isActive, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
       child: Column(

@@ -67,6 +67,20 @@ export class User extends Document {
 
   @Prop()
   lastLoginAt?: Date;
+
+  @Prop()
+  company?: string;
+
+  @Prop()
+  licenseNo?: string;
+
+  @Prop({ type: Object })
+  bankDetails?: {
+    bankName: string;
+    accountName: string;
+    accountNumber: string;
+    iban?: string;
+  };
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

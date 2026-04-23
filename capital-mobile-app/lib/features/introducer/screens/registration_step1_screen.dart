@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:capital_mobile_app/core/theme/app_theme.dart';
+import 'package:capital_mobile_app/providers/auth_provider.dart';
 
 class RegistrationStep1Screen extends StatefulWidget {
   const RegistrationStep1Screen({super.key});
@@ -14,6 +16,7 @@ class _RegistrationStep1ScreenState extends State<RegistrationStep1Screen> {
   final _fullNameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -23,8 +26,43 @@ class _RegistrationStep1ScreenState extends State<RegistrationStep1Screen> {
     super.dispose();
   }
 
-  void _handleContinue() {
-    Navigator.pushNamed(context, '/registration-step3');
+  void _handleContinue() async {
+    final fullName = _fullNameController.text.trim();
+    final phone = _phoneController.text.trim();
+    final email = _emailController.text.trim();
+
+    if (fullName.isEmpty || phone.isEmpty || email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please fill in all fields')),
+      );
+      return;
+    }
+
+    setState(() => _isLoading = true);
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final nameParts = fullName.split(' ');
+    final firstName = nameParts.first;
+    final lastName =
+        nameParts.length > 1 ? nameParts.sublist(1).join(' ') : firstName;
+
+    final success = await authProvider.register(
+      email: email,
+      password: 'Password@123',
+      phone: phone,
+      firstName: firstName,
+      lastName: lastName,
+      role: 'introducer',
+    );
+
+    if (!mounted) return;
+    setState(() => _isLoading = false);
+    if (success) {
+      Navigator.pushNamed(context, '/registration-step3');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(authProvider.error ?? 'Registration failed')),
+      );
+    }
   }
 
   @override
@@ -275,7 +313,7 @@ class _RegistrationStep1ScreenState extends State<RegistrationStep1Screen> {
         SizedBox(
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: _handleContinue,
+            onPressed: _isLoading ? null : _handleContinue,
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF1B3012),
               foregroundColor: Colors.white,
@@ -285,14 +323,23 @@ class _RegistrationStep1ScreenState extends State<RegistrationStep1Screen> {
               ),
               elevation: 2,
             ),
-            child: Text(
-              'CONTINUE',
-              style: GoogleFonts.manrope(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 2,
-              ),
-            ),
+            child: _isLoading
+                ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: Colors.white,
+                    ),
+                  )
+                : Text(
+                    'CONTINUE',
+                    style: GoogleFonts.manrope(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 2,
+                    ),
+                  ),
           ),
         ),
         const SizedBox(height: 12),

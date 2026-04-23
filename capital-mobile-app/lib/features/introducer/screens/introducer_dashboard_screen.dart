@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:capital_mobile_app/core/theme/app_theme.dart';
+import 'package:capital_mobile_app/providers/auth_provider.dart';
 
 class IntroducerDashboardScreen extends StatelessWidget {
   const IntroducerDashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<AuthProvider>(context);
+    final isPending = auth.isPending;
+    final firstName = auth.user?.firstName ?? auth.user?.fullName ?? 'there';
+
     return Scaffold(
       backgroundColor: AppTheme.surface,
       body: Column(
         children: [
           _buildAppBar(),
+          if (isPending) _buildPendingBanner(),
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
@@ -20,7 +27,7 @@ class IntroducerDashboardScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 24),
-                    _buildGreeting(),
+                    _buildGreeting(firstName),
                     const SizedBox(height: 24),
                     _buildSummaryCards(),
                     const SizedBox(height: 32),
@@ -37,6 +44,48 @@ class IntroducerDashboardScreen extends StatelessWidget {
       ),
       floatingActionButton: _buildFAB(context),
       bottomNavigationBar: _buildBottomNav(),
+    );
+  }
+
+  Widget _buildPendingBanner() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: const BoxDecoration(
+        color: Color(0xFFFFF8E1),
+        border: Border(
+          bottom: BorderSide(color: Color(0xFFFFE082)),
+        ),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.hourglass_top_rounded, color: Color(0xFFF59E0B), size: 20),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Approval Pending',
+                  style: GoogleFonts.manrope(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: const Color(0xFF92400E),
+                  ),
+                ),
+                Text(
+                  'Your account is under review. You can start adding leads — commissions activate on approval.',
+                  style: GoogleFonts.inter(
+                    fontSize: 12,
+                    color: const Color(0xFF78350F),
+                    height: 1.4,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -91,12 +140,12 @@ class IntroducerDashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildGreeting() {
+  Widget _buildGreeting(String firstName) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Hello, Alexander',
+          'Hello, $firstName',
           style: GoogleFonts.manrope(
             fontSize: 28,
             fontWeight: FontWeight.w800,

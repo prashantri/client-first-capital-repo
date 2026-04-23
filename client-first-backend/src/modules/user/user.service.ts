@@ -36,6 +36,14 @@ export class UserService {
     return this.userModel.find({ role, status: 'active' }).select('-passwordHash');
   }
 
+  async updateBankDetails(userId: string, bankDetails: { bankName: string; accountName: string; accountNumber: string; iban?: string }) {
+    return this.userModel.findByIdAndUpdate(
+      userId,
+      { bankDetails },
+      { new: true },
+    ).select('-passwordHash');
+  }
+
   async getDashboardStats() {
     const [totalUsers, byRole, byStatus] = await Promise.all([
       this.userModel.countDocuments(),

@@ -317,7 +317,7 @@ class WelcomeScreen extends StatelessWidget {
           width: double.infinity,
           child: OutlinedButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/registration-step1');
+              Navigator.pushNamed(context, '/introducer-registration');
             },
             style: OutlinedButton.styleFrom(
               foregroundColor: AppTheme.primaryColor,

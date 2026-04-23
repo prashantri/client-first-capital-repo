@@ -1,6 +1,10 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:capital_mobile_app/core/theme/app_theme.dart';
+import 'package:capital_mobile_app/providers/auth_provider.dart';
 
 class RegistrationStep3Screen extends StatefulWidget {
   const RegistrationStep3Screen({super.key});
@@ -11,33 +15,77 @@ class RegistrationStep3Screen extends StatefulWidget {
 }
 
 class _RegistrationStep3ScreenState extends State<RegistrationStep3Screen> {
-  String? _panFileName;
-  String? _aadhaarFrontFileName;
-  String? _aadhaarBackFileName;
-  String? _addressProofFileName;
+  String? _licenseFileName;
+  Uint8List? _licenseFileBytes;
+  bool _isSubmitting = false;
 
-  void _handleSubmit() {
-    Navigator.pushNamedAndRemoveUntil(
-        context, '/review-status', (route) => false);
+  // Form data received from Step 1
+  Map<String, dynamic> _formData = {};
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)?.settings.arguments;
+    if (args is Map<String, dynamic>) {
+      _formData = args;
+    }
   }
 
-  void _simulateUpload(String field) {
-    setState(() {
-      switch (field) {
-        case 'pan':
-          _panFileName = 'pan_card.pdf';
-          break;
-        case 'aadhaar_front':
-          _aadhaarFrontFileName = 'aadhaar_front.jpg';
-          break;
-        case 'aadhaar_back':
-          _aadhaarBackFileName = 'aadhaar_back.jpg';
-          break;
-        case 'address':
-          _addressProofFileName = 'utility_bill.pdf';
-          break;
-      }
-    });
+  Future<void> _pickLicenseFile() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf', 'jpg', 'jpeg', 'png'],
+      withData: true,
+    );
+    if (result != null && result.files.single.bytes != null) {
+      setState(() {
+        _licenseFileName = result.files.single.name;
+        _licenseFileBytes = result.files.single.bytes;
+      });
+    }
+  }
+
+  Future<void> _handleSubmit() async {
+    if (_licenseFileBytes == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Please upload your License / ID document to continue'),
+          backgroundColor: AppTheme.error,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
+    setState(() => _isSubmitting = true);
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
+    final success = await authProvider.registerIntroducer(
+      fullName: _formData['fullName'] ?? '',
+      email: _formData['email'] ?? '',
+      phone: _formData['phone'] ?? '',
+      company: _formData['company'] ?? '',
+      licenseNo: _formData['licenseNo'] ?? '',
+      password: _formData['password'] ?? '',
+      licenseFileBytes: _licenseFileBytes,
+      licenseFileName: _licenseFileName,
+    );
+
+    if (!mounted) return;
+    setState(() => _isSubmitting = false);
+
+    if (success) {
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/review-status', (route) => false);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(authProvider.error ?? 'Submission failed. Please try again.'),
+          backgroundColor: AppTheme.error,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 
   @override
@@ -58,12 +106,8 @@ class _RegistrationStep3ScreenState extends State<RegistrationStep3Screen> {
                     _buildProgressSection(),
                     const SizedBox(height: 24),
                     _buildSecurityNotice(),
-                    const SizedBox(height: 24),
-                    _buildPanCardSection(),
-                    const SizedBox(height: 24),
-                    _buildAadhaarSection(),
-                    const SizedBox(height: 24),
-                    _buildAddressProofSection(),
+                    const SizedBox(height: 28),
+                    _buildLicenseSection(),
                     const SizedBox(height: 32),
                     _buildActions(),
                     const SizedBox(height: 32),
@@ -84,39 +128,45 @@ class _RegistrationStep3ScreenState extends State<RegistrationStep3Screen> {
       padding: const EdgeInsets.only(top: 48, left: 24, right: 24, bottom: 16),
       decoration: BoxDecoration(
         color: Colors.white.withAlpha(204),
-        border: Border(
-          bottom: BorderSide(color: const Color(0xFFF5F5F4)),
-        ),
+        border: Border(bottom: BorderSide(color: const Color(0xFFF5F5F4))),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              Image.asset('assets/images/logo.png', width: 22, height: 22),
-              const SizedBox(width: 8),
-              Text(
-                'Client First Capital',
-                style: GoogleFonts.manrope(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w800,
-                  color: const Color(0xFF1B3012),
-                  letterSpacing: -0.8,
-                ),
+          InkWell(
+            onTap: () => Navigator.pop(context),
+            borderRadius: BorderRadius.circular(8),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              child: Row(
+                children: [
+                  Icon(Icons.arrow_back, color: AppTheme.primaryColor, size: 20),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Back',
+                    style: GoogleFonts.manrope(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: AppTheme.primaryColor,
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-          // Profile avatar placeholder
-          Container(
-            width: 32,
-            height: 32,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: const Color(0xFFF5F5F4),
-              border: Border.all(color: const Color(0xFFE5E5E5)),
             ),
-            child: const Icon(Icons.person, size: 18, color: Color(0xFF78716C)),
           ),
+          const Spacer(),
+          Image.asset('assets/images/logo.png', width: 22, height: 22),
+          const SizedBox(width: 8),
+          Text(
+            'Client First Capital',
+            style: GoogleFonts.manrope(
+              fontSize: 18,
+              fontWeight: FontWeight.w800,
+              color: AppTheme.primaryColor,
+              letterSpacing: -0.8,
+            ),
+          ),
+          const Spacer(),
+          const SizedBox(width: 56),
         ],
       ),
     );
@@ -133,45 +183,25 @@ class _RegistrationStep3ScreenState extends State<RegistrationStep3Screen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'VERIFICATION',
+                  'STEP 2 OF 2',
                   style: GoogleFonts.manrope(
-                    fontSize: 11,
+                    fontSize: 10,
                     fontWeight: FontWeight.w700,
-                    letterSpacing: 2,
+                    letterSpacing: 3,
                     color: AppTheme.primaryContainer,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'KYC Documents',
+                  'License Document',
                   style: GoogleFonts.manrope(
-                    fontSize: 24,
+                    fontSize: 26,
                     fontWeight: FontWeight.w800,
                     color: AppTheme.onSurface,
+                    letterSpacing: -0.5,
                   ),
                 ),
               ],
-            ),
-            RichText(
-              text: TextSpan(
-                style: GoogleFonts.manrope(fontSize: 14),
-                children: [
-                  TextSpan(
-                    text: 'Step 3 ',
-                    style: GoogleFonts.manrope(
-                      fontWeight: FontWeight.w600,
-                      color: AppTheme.onSurface,
-                    ),
-                  ),
-                  TextSpan(
-                    text: 'of 3',
-                    style: GoogleFonts.manrope(
-                      fontWeight: FontWeight.w500,
-                      color: AppTheme.outline,
-                    ),
-                  ),
-                ],
-              ),
             ),
           ],
         ),
@@ -181,8 +211,7 @@ class _RegistrationStep3ScreenState extends State<RegistrationStep3Screen> {
           child: LinearProgressIndicator(
             value: 1.0,
             backgroundColor: AppTheme.surfaceContainerHigh,
-            valueColor:
-                AlwaysStoppedAnimation<Color>(AppTheme.primaryContainer),
+            valueColor: AlwaysStoppedAnimation<Color>(AppTheme.primaryContainer),
             minHeight: 4,
           ),
         ),
@@ -194,37 +223,23 @@ class _RegistrationStep3ScreenState extends State<RegistrationStep3Screen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFD4E8D0).withAlpha(77),
+        color: AppTheme.primaryColor.withAlpha(10),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: const Color(0xFFD4E8D0)),
+        border: Border.all(color: AppTheme.primaryColor.withAlpha(40)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(Icons.verified_user, color: AppTheme.primaryContainer, size: 22),
-          const SizedBox(width: 16),
+          Icon(Icons.verified_user, color: AppTheme.primaryContainer, size: 20),
+          const SizedBox(width: 12),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Bank-Grade Encryption',
-                  style: GoogleFonts.manrope(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    color: const Color(0xFF111F0F),
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Your documents are encrypted and stored in a secure digital vault. Only authorized compliance officers can review them.',
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    color: AppTheme.onSurfaceVariant,
-                    height: 1.5,
-                  ),
-                ),
-              ],
+            child: Text(
+              'Upload a clear copy of your financial license or government-issued ID. This document is encrypted and reviewed only by authorised compliance officers.',
+              style: GoogleFonts.inter(
+                fontSize: 13,
+                color: AppTheme.onSurfaceVariant,
+                height: 1.5,
+              ),
             ),
           ),
         ],
@@ -232,62 +247,13 @@ class _RegistrationStep3ScreenState extends State<RegistrationStep3Screen> {
     );
   }
 
-  Widget _buildPanCardSection() {
+  Widget _buildLicenseSection() {
     return _buildDocumentCard(
       icon: Icons.badge_outlined,
-      title: 'PAN Card',
+      title: 'License / ID Document',
       description:
-          'Upload the front side of your Permanent Account Number card.',
-      child: _buildUploadZone(
-        fileName: _panFileName,
-        onTap: () => _simulateUpload('pan'),
-        label: 'Click to upload or drag and drop',
-        sublabel: 'PDF, JPEG, OR PNG (MAX 5MB)',
-      ),
-    );
-  }
-
-  Widget _buildAadhaarSection() {
-    return _buildDocumentCard(
-      icon: Icons.credit_card_outlined,
-      title: 'Aadhaar Card',
-      description: 'Please provide both front and back sides of your Aadhaar.',
-      child: Row(
-        children: [
-          Expanded(
-            child: _buildUploadZone(
-              fileName: _aadhaarFrontFileName,
-              onTap: () => _simulateUpload('aadhaar_front'),
-              label: 'Front Side',
-              compact: true,
-            ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: _buildUploadZone(
-              fileName: _aadhaarBackFileName,
-              onTap: () => _simulateUpload('aadhaar_back'),
-              label: 'Back Side',
-              compact: true,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAddressProofSection() {
-    return _buildDocumentCard(
-      icon: Icons.receipt_long_outlined,
-      title: 'Address Proof',
-      description:
-          'Utility Bill (Electricity, Water), Rent Agreement, or Voter ID.',
-      child: _buildUploadZone(
-        fileName: _addressProofFileName,
-        onTap: () => _simulateUpload('address'),
-        label: 'Upload Proof of Address',
-        sublabel: 'DOCUMENT SHOULD NOT BE OLDER THAN 3 MONTHS',
-      ),
+          'Financial license, broker license, or government-issued ID that confirms your authority to introduce clients.',
+      child: _buildUploadZone(),
     );
   }
 
@@ -361,30 +327,22 @@ class _RegistrationStep3ScreenState extends State<RegistrationStep3Screen> {
     );
   }
 
-  Widget _buildUploadZone({
-    required String? fileName,
-    required VoidCallback onTap,
-    required String label,
-    String? sublabel,
-    bool compact = false,
-  }) {
-    final isUploaded = fileName != null;
+  Widget _buildUploadZone() {
+    final isUploaded = _licenseFileName != null;
 
     return GestureDetector(
-      onTap: onTap,
+      onTap: _pickLicenseFile,
       child: Container(
-        padding: EdgeInsets.all(compact ? 20 : 32),
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
         decoration: BoxDecoration(
           color: isUploaded
-              ? const Color(0xFFD4E8D0).withAlpha(51)
+              ? AppTheme.primaryColor.withAlpha(13)
               : const Color(0xFFFAFAF9),
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: isUploaded
-                ? AppTheme.primaryContainer
-                : AppTheme.outlineVariant,
-            width: isUploaded ? 1 : 2,
-            strokeAlign: BorderSide.strokeAlignInside,
+            color: isUploaded ? AppTheme.primaryContainer : AppTheme.outlineVariant,
+            width: isUploaded ? 1.5 : 1,
           ),
         ),
         child: Column(
@@ -392,32 +350,43 @@ class _RegistrationStep3ScreenState extends State<RegistrationStep3Screen> {
           children: [
             Icon(
               isUploaded ? Icons.check_circle : Icons.cloud_upload_outlined,
-              color:
-                  isUploaded ? AppTheme.primaryContainer : AppTheme.outline,
-              size: compact ? 24 : 32,
+              color: isUploaded ? AppTheme.primaryContainer : AppTheme.outline,
+              size: 40,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 12),
             Text(
-              isUploaded ? fileName! : label,
+              isUploaded ? _licenseFileName! : 'Tap to upload document',
               style: GoogleFonts.manrope(
-                fontSize: compact ? 12 : 14,
+                fontSize: 14,
                 fontWeight: FontWeight.w700,
-                color: isUploaded
-                    ? AppTheme.primaryContainer
-                    : AppTheme.onSurface,
+                color: isUploaded ? AppTheme.primaryContainer : AppTheme.onSurface,
               ),
               textAlign: TextAlign.center,
             ),
-            if (sublabel != null && !isUploaded) ...[
-              const SizedBox(height: 4),
+            if (!isUploaded) ...[
+              const SizedBox(height: 6),
               Text(
-                sublabel,
+                'PDF, JPEG OR PNG  •  MAX 5MB',
                 style: GoogleFonts.manrope(
-                  fontSize: 9,
+                  fontSize: 10,
                   letterSpacing: 1.5,
                   color: AppTheme.outline,
                 ),
-                textAlign: TextAlign.center,
+              ),
+            ],
+            if (isUploaded) ...[
+              const SizedBox(height: 8),
+              GestureDetector(
+                onTap: _pickLicenseFile,
+                child: Text(
+                  'Replace file',
+                  style: GoogleFonts.manrope(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: AppTheme.primaryColor,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
               ),
             ],
           ],
@@ -429,52 +398,51 @@ class _RegistrationStep3ScreenState extends State<RegistrationStep3Screen> {
   Widget _buildActions() {
     return Column(
       children: [
-        // Submit button
         SizedBox(
           width: double.infinity,
           child: ElevatedButton.icon(
-            onPressed: _handleSubmit,
-            icon: const Icon(Icons.check_circle, size: 18),
+            onPressed: _isSubmitting ? null : _handleSubmit,
+            icon: _isSubmitting
+                ? const SizedBox(
+                    width: 18,
+                    height: 18,
+                    child: CircularProgressIndicator(
+                        strokeWidth: 2, color: Colors.white),
+                  )
+                : const Icon(Icons.check_circle_outline, size: 18),
             label: Text(
-              'Submit Application',
+              _isSubmitting ? 'Submitting Application...' : 'Submit Application',
               style: GoogleFonts.manrope(
-                fontSize: 14,
-                fontWeight: FontWeight.w800,
-              ),
+                  fontSize: 15, fontWeight: FontWeight.w800),
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppTheme.primaryContainer,
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 18),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
+                  borderRadius: BorderRadius.circular(8)),
               elevation: 4,
               shadowColor: AppTheme.primaryColor.withAlpha(51),
             ),
           ),
         ),
         const SizedBox(height: 12),
-        // Back button
         SizedBox(
           width: double.infinity,
           child: OutlinedButton.icon(
             onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.arrow_back, size: 18),
             label: Text(
-              'Back to Step 2',
+              'Back to Step 1',
               style: GoogleFonts.manrope(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-              ),
+                  fontSize: 14, fontWeight: FontWeight.w700),
             ),
             style: OutlinedButton.styleFrom(
               foregroundColor: AppTheme.primaryContainer,
               backgroundColor: const Color(0xFFF5F5F4),
-              padding: const EdgeInsets.symmetric(vertical: 18),
+              padding: const EdgeInsets.symmetric(vertical: 16),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
+                  borderRadius: BorderRadius.circular(8)),
               side: const BorderSide(color: Color(0xFFE5E5E5)),
             ),
           ),
@@ -486,7 +454,7 @@ class _RegistrationStep3ScreenState extends State<RegistrationStep3Screen> {
   Widget _buildRegulatoryFooter() {
     return Center(
       child: Text(
-        'BY SUBMITTING, YOU AGREE TO OUR TERMS OF SERVICE\nAND PRIVACY POLICY.\nCLIENT FIRST CAPITAL IS A SEBI REGISTERED ENTITY.',
+        'BY SUBMITTING YOU AGREE TO OUR TERMS OF SERVICE\nAND PRIVACY POLICY.',
         textAlign: TextAlign.center,
         style: GoogleFonts.manrope(
           fontSize: 10,

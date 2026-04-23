@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 import 'package:capital_mobile_app/core/theme/app_theme.dart';
+import 'package:capital_mobile_app/providers/introducer_provider.dart';
+import 'package:capital_mobile_app/models/referral.dart';
 
 class ReferralListScreen extends StatefulWidget {
   const ReferralListScreen({super.key});
@@ -13,47 +17,61 @@ class _ReferralListScreenState extends State<ReferralListScreen> {
   String _activeFilter = 'All';
   final TextEditingController _searchController = TextEditingController();
 
-  final List<_ReferralData> _referrals = const [
-    _ReferralData(
-      name: 'Jonathan Wright',
-      service: 'Personal Loan',
-      date: 'Oct 24, 2023',
-      status: 'Approved',
-      icon: Icons.person,
-    ),
-    _ReferralData(
-      name: 'Eleanor Vance',
-      service: 'Wealth Management',
-      date: 'Oct 28, 2023',
-      status: 'Pending',
-      icon: Icons.account_balance_wallet,
-    ),
-    _ReferralData(
-      name: 'Marcus Thorne',
-      service: 'Mortgage Refinance',
-      date: 'Nov 02, 2023',
-      status: 'Rejected',
-      icon: Icons.real_estate_agent,
-    ),
-    _ReferralData(
-      name: 'Sophia Chen',
-      service: 'Commercial Credit',
-      date: 'Nov 05, 2023',
-      status: 'Approved',
-      icon: Icons.business_center,
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<IntroducerProvider>(context, listen: false).loadReferrals();
+    });
+  }
 
-  List<_ReferralData> get _filteredReferrals {
+  String _mapStatus(String backendStatus) {
+    switch (backendStatus) {
+      case 'converted':
+        return 'Approved';
+      case 'lost':
+        return 'Rejected';
+      default:
+        return 'Pending';
+    }
+  }
+
+  IconData _serviceIcon(String? serviceType) {
+    switch (serviceType) {
+      case 'Structured Loan':
+        return Icons.account_balance;
+      case 'Wealth Management / Investment':
+        return Icons.account_balance_wallet;
+      case 'Premium Life Insurance':
+        return Icons.health_and_safety;
+      case 'Tax Optimization Strategy':
+        return Icons.receipt_long;
+      case 'Estate Planning':
+        return Icons.real_estate_agent;
+      default:
+        return Icons.person;
+    }
+  }
+
+  List<_ReferralData> _getFilteredReferrals(List<Referral> referrals) {
     final query = _searchController.text.toLowerCase();
-    return _referrals.where((r) {
+    return referrals.where((r) {
+      final displayStatus = _mapStatus(r.status);
       final matchesFilter =
-          _activeFilter == 'All' || r.status == _activeFilter;
+          _activeFilter == 'All' || displayStatus == _activeFilter;
       final matchesSearch = query.isEmpty ||
-          r.name.toLowerCase().contains(query) ||
-          r.service.toLowerCase().contains(query);
+          r.referralName.toLowerCase().contains(query) ||
+          (r.serviceType?.toLowerCase().contains(query) ?? false);
       return matchesFilter && matchesSearch;
-    }).toList();
+    }).map((r) => _ReferralData(
+      name: r.referralName,
+      service: r.serviceType ?? 'General',
+      date: r.createdAt != null
+          ? DateFormat('MMM dd, yyyy').format(r.createdAt!)
+          : '',
+      status: _mapStatus(r.status),
+      icon: _serviceIcon(r.serviceType),
+    )).toList();
   }
 
   @override
@@ -64,6 +82,8 @@ class _ReferralListScreenState extends State<ReferralListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<IntroducerProvider>();
+    final filteredReferrals = _getFilteredReferrals(provider.referrals);
     return Scaffold(
       backgroundColor: AppTheme.surface,
       body: Column(
@@ -82,7 +102,12 @@ class _ReferralListScreenState extends State<ReferralListScreen> {
                   const SizedBox(height: 20),
                   _buildFilters(),
                   const SizedBox(height: 24),
-                  ..._filteredReferrals.map(_buildReferralCard),
+                  if (provider.isLoading && provider.referrals.isEmpty)
+                    const Padding(
+                      padding: EdgeInsets.only(top: 40),
+                      child: Center(child: CircularProgressIndicator()),
+                    ),
+                  ...filteredReferrals.map(_buildReferralCard),
                   const SizedBox(height: 100),
                 ],
               ),

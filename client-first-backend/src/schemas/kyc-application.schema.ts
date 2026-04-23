@@ -18,6 +18,9 @@ export class KycApplication extends Document {
   @Prop() passportUrl?: string;
   @Prop() selfieUrl?: string;
 
+  @Prop({ type: Map, of: Object, default: {} })
+  documents: Map<string, { fileName: string; mimeType: string; data: string; uploadedAt: Date }>;
+
   @Prop({ type: Object })
   address?: { line1: string; line2?: string; city: string; emirate: string; country: string; postalCode?: string };
 

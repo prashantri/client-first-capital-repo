@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Patch, Param, Body, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Param, Body, Query, UseGuards, Req } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags, ApiOperation } from '@nestjs/swagger';
 import { ReferralService } from './referral.service';
@@ -16,8 +16,12 @@ export class ReferralController {
   @Post()
   @Roles(UserRole.INTRODUCER)
   @ApiOperation({ summary: 'Create a new referral (introducer only)' })
-  create(@CurrentUser('_id') userId: string, @Body() data: any) {
-    return this.referralService.create({ ...data, introducerId: userId });
+  create(@Req() req: any, @Body() data: any) {
+    const introducer = req.user;
+    return this.referralService.create(
+      { ...data, introducerId: introducer._id },
+      { fullName: introducer.fullName, email: introducer.email },
+    );
   }
 
   @Get('my')

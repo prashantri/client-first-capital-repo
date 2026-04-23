@@ -210,7 +210,7 @@ class ProfileScreen extends StatelessWidget {
         _buildMenuItem(
           icon: Icons.account_balance,
           label: 'Bank Details',
-          onTap: () {},
+          onTap: () => Navigator.pushNamed(context, '/bank-details'),
         ),
         const SizedBox(height: 12),
         _buildMenuItem(

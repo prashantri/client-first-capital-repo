@@ -17,6 +17,7 @@ import { ShareholdingModule } from './modules/shareholding/shareholding.module';
 import { EducationModule } from './modules/education/education.module';
 import { ComplianceModule } from './modules/compliance/compliance.module';
 import { NotificationModule } from './modules/notification/notification.module';
+import { AuditLogModule } from './modules/audit-log/audit-log.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { NotificationModule } from './modules/notification/notification.module';
     EducationModule,
     ComplianceModule,
     NotificationModule,
+    AuditLogModule,
   ],
 })
 export class AppModule {}

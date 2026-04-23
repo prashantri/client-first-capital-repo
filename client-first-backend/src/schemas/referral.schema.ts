@@ -18,6 +18,9 @@ export class Referral extends Document {
   @Prop({ default: 'new', enum: ['new', 'contacted', 'meeting_scheduled', 'kyc_pending', 'kyc_submitted', 'converted', 'lost'] })
   status: string;
 
+  @Prop({ trim: true })
+  serviceType?: string;
+
   @Prop()
   notes?: string;
 
@@ -44,6 +47,12 @@ export class Referral extends Document {
 
   @Prop()
   convertedAt?: Date;
+
+  @Prop()
+  hubspotContactId?: string;
+
+  @Prop()
+  hubspotDealId?: string;
 }
 
 export const ReferralSchema = SchemaFactory.createForClass(Referral);

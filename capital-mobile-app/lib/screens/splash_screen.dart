@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:capital_mobile_app/core/theme/app_theme.dart';
+import 'package:capital_mobile_app/providers/auth_provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,11 +27,20 @@ class _SplashScreenState extends State<SplashScreen>
     );
     _controller.forward();
 
-    Future.delayed(const Duration(seconds: 3), () {
-      if (mounted) {
-        Navigator.pushReplacementNamed(context, '/welcome');
-      }
-    });
+    _checkAuth();
+  }
+
+  Future<void> _checkAuth() async {
+    await Future.delayed(const Duration(seconds: 2));
+    if (!mounted) return;
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final isLoggedIn = await authProvider.tryAutoLogin();
+    if (!mounted) return;
+    if (isLoggedIn) {
+      Navigator.pushReplacementNamed(context, '/introducer-dashboard');
+    } else {
+      Navigator.pushReplacementNamed(context, '/welcome');
+    }
   }
 
   @override

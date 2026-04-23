@@ -23,7 +23,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(payload: JwtPayload) {
     const user = await this.userModel.findById(payload.sub).select('-passwordHash');
-    if (!user || user.status !== 'active') {
+    if (!user || user.status === 'suspended') {
       throw new UnauthorizedException('User not found or inactive');
     }
     return user;

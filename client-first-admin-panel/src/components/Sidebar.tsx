@@ -3,19 +3,12 @@ import { useAuth } from '../context/AuthContext';
 
 const nav = [
   { to: '/', label: 'Dashboard', icon: '📊' },
-  { to: '/users', label: 'Users', icon: '👥' },
-  { to: '/referrals', label: 'Referrals', icon: '🤝' },
-  { to: '/commissions', label: 'Commissions', icon: '💰' },
-  { to: '/portfolios', label: 'Portfolios', icon: '📈' },
   { to: '/kyc', label: 'KYC Applications', icon: '📋' },
-  { to: '/appointments', label: 'Appointments', icon: '📅' },
-  { to: '/marketing', label: 'Marketing Assets', icon: '📢' },
+  { to: '/referrals', label: 'Referrals', icon: '🤝' },
+  { to: '/users', label: 'Users', icon: '👥' },
+  { to: '/commissions', label: 'Commissions', icon: '💰' },
   { to: '/leaderboard', label: 'Leaderboard', icon: '🏆' },
-  { to: '/valuations', label: 'Valuations', icon: '🏢' },
-  { to: '/shareholdings', label: 'Shareholdings', icon: '📜' },
-  { to: '/education', label: 'Education', icon: '🎓' },
-  { to: '/compliance', label: 'Compliance', icon: '✅' },
-  { to: '/notifications', label: 'Notifications', icon: '🔔' },
+  { to: '/audit-log', label: 'Audit Log', icon: '🗒️' },
 ];
 
 export default function Sidebar() {

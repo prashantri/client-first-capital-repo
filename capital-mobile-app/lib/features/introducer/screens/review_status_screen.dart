@@ -130,7 +130,7 @@ class ReviewStatusScreen extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'Request Under Review',
+          'Application Submitted',
           style: GoogleFonts.manrope(
             fontSize: 28,
             fontWeight: FontWeight.w800,
@@ -140,7 +140,7 @@ class ReviewStatusScreen extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Text(
-          'Thank you for your application. Our underwriting team is currently conducting a thorough review. You will be notified of our decision shortly.',
+          'Your introducer request is registered and will be acted upon in 24 hours. You will receive a notification once your account is approved.',
           textAlign: TextAlign.center,
           style: GoogleFonts.inter(
             fontSize: 15,
@@ -166,25 +166,25 @@ class ReviewStatusScreen extends StatelessWidget {
         children: [
           _buildStatusRow(
             'CURRENT STATUS',
-            _buildStatusChip('IN PROGRESS'),
+            _buildStatusChip('PENDING REVIEW'),
           ),
           const SizedBox(height: 20),
           _buildStatusRow(
-            'APPLICATION REFERENCE',
+            'NEXT STEP',
             Text(
-              '#CFC-882190',
-              style: GoogleFonts.robotoMono(
+              'Admin Review',
+              style: GoogleFonts.manrope(
                 fontSize: 14,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w700,
                 color: const Color(0xFF1B3D11),
               ),
             ),
           ),
           const SizedBox(height: 20),
           _buildStatusRow(
-            'ESTIMATED RESOLUTION',
+            'ESTIMATED RESPONSE',
             Text(
-              '1-2 Business Days',
+              'Within 24 Hours',
               style: GoogleFonts.manrope(
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
@@ -240,13 +240,12 @@ class ReviewStatusScreen extends StatelessWidget {
   Widget _buildActions(BuildContext context) {
     return Column(
       children: [
-        // Return to Dashboard
         SizedBox(
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
               Navigator.pushNamedAndRemoveUntil(
-                  context, '/introducer-dashboard', (route) => false);
+                  context, '/login', (route) => false);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppTheme.primaryContainer,
@@ -259,31 +258,7 @@ class ReviewStatusScreen extends StatelessWidget {
               shadowColor: AppTheme.primaryColor.withAlpha(51),
             ),
             child: Text(
-              'RETURN TO DASHBOARD',
-              style: GoogleFonts.manrope(
-                fontSize: 12,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 2,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 12),
-        // View Submission Details
-        SizedBox(
-          width: double.infinity,
-          child: OutlinedButton(
-            onPressed: () {},
-            style: OutlinedButton.styleFrom(
-              foregroundColor: AppTheme.primaryContainer,
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4),
-              ),
-              side: BorderSide(color: AppTheme.outlineVariant),
-            ),
-            child: Text(
-              'VIEW SUBMISSION DETAILS',
+              'BACK TO LOGIN',
               style: GoogleFonts.manrope(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
